@@ -11,14 +11,14 @@
             --bg-card: #141f17;
             --neon-green: #00ff66;
             --neon-border: #00cc52;
-            --text-white: #ffffff;
-            --text-gray: #b0c4b1;
+            --text-white: #FFFFFF;
+            --text-gray: #b4c4b1;
             --accent-red: #ff3333;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-white); padding-bottom: 50px; }
         
-        .app-header {
+        app-header {
             background: linear-gradient(180deg, #122618 0%, #0a0f0d 100%);
             padding: 15px; border-bottom: 2px solid var(--neon-green);
             text-align: center; position: sticky; top: 0; z-index: 1000;
@@ -26,12 +26,12 @@
         .app-header h1 { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; }
         .grinch-text { color: var(--neon-green); text-shadow: 0 0 10px rgba(0, 255, 102, 0.6); }
         .sub-header { font-size: 0.75rem; color: var(--text-gray); margin-top: 2px; }
-
+        
         .app-main { padding: 12px; max-width: 600px; margin: 0 auto; }
-
-        /* Banner Ofertas del Día con Foto Visual */
+        
+        /* Banner Ofertas */
         .banner-ofertas {
-            background: linear-gradient(135deg, #260d0d 14%, #141f17 100%);
+            background: linear-gradient(135deg, #250d0d 14%, #141f17 100%);
             border: 2px solid var(--accent-red); border-radius: 14px;
             padding: 12px; margin-bottom: 15px; display: flex; align-items: center;
             justify-content: space-between; text-decoration: none; color: var(--text-white);
@@ -39,29 +39,45 @@
         }
         .banner-ofertas img { width: 90px; height: 75px; object-fit: cover; border-radius: 8px; border: 1px solid var(--accent-red); }
         .banner-info h2 { font-size: 1rem; color: #ff6666; display: flex; align-items: center; gap: 5px; }
-        .banner-info p { font-size: 0.75rem; color: var(--text-gray); margin-top: 3px; }
+        .banner-info p { font-size: 0.75rem; color: var(--text-gray); margin-top: 5px; }
 
-        /* Grilla de Tarjetas Visuales (Estilo App) */
+        /* Tarjetas Visuales de Secciones */
         .grid-visual { display: flex; flex-direction: column; gap: 12px; margin-bottom: 15px; }
         
         .card-visual {
             background-color: var(--bg-card); border: 2px solid var(--neon-border);
             border-radius: 14px; overflow: hidden; display: flex; align-items: center;
             text-decoration: none; color: var(--text-white); transition: transform 0.1s;
-            box-shadow: 0 4px 10px rgba(0, 255, 102, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 255, 102, 0.1); cursor: pointer;
         }
         .card-visual:active { transform: scale(0.98); }
         .card-img-container { width: 110px; height: 95px; flex-shrink: 0; background: #000; position: relative; }
         .card-img-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
         
         .card-content { padding: 12px; flex-grow: 1; display: flex; justify-content: space-between; align-items: center; }
-        .card-text h3 { font-size: 1rem; color: var(--neon-green); margin-bottom: 3px; }
+        .card-text h3 { font-size: 1rem; color: var(--neon-green); margin-bottom: 4px; }
         .card-text p { font-size: 0.75rem; color: var(--text-gray); line-height: 1.2; }
-        .card-arrow { font-size: 1.2rem; color: var(--neon-green); background: rgba(0,255,102,0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-left: 8px; flex-shrink: 0; }
+        .card-arrow { font-size: 1.2rem; color: var(--neon-green); background: rgba(0,255,102,0.1); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
 
-        /* Botones Inferiores Principales */
-        .grid-botones-inferiores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        /* Secciones desplegables / Listados detallados */
+        .detalle-seccion {
+            background: var(--bg-card); border: 2px solid var(--neon-green);
+            border-radius: 14px; padding: 15px; margin-bottom: 15px; display: none;
+        }
+        .detalle-seccion.activo { display: block; }
+        .detalle-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(0,255,102,0.3); padding-bottom: 8px; }
+        .detalle-header h3 { font-size: 1.1rem; color: var(--neon-green); }
+        .btn-cerrar { background: var(--accent-red); color: white; border: none; padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; }
         
+        .item-lista {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.85rem;
+        }
+        .item-lista span:last-child { color: var(--neon-green); font-weight: 600; font-size: 0.8rem; background: rgba(0,255,102,0.1); padding: 2px 6px; border-radius: 4px; }
+
+        /* Botones inferiores principales */
+        .grid-botones-inferiores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
         .btn-accion-grande {
             background: linear-gradient(135deg, #122618 0%, #0d3b1e 100%);
             border: 2px solid var(--neon-green); border-radius: 12px; padding: 12px;
@@ -69,205 +85,173 @@
             align-items: center; justify-content: center; text-align: center; gap: 5px;
             box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
         }
-        .btn-accion-grande.whatsapp { background: linear-gradient(135deg, #0d3b1e 0%, #104e25 100%); }
         .btn-accion-grande i { font-size: 1.4rem; color: var(--neon-green); }
         .btn-accion-grande span { font-size: 0.8rem; font-weight: bold; }
         .btn-accion-grande small { font-size: 0.65rem; color: var(--text-gray); }
 
-        /* Acordeones / Secciones Detalladas por Categoría */
-        .seccion-contenido {
-            background: var(--bg-card); border: 1px solid var(--neon-border);
-            border-radius: 12px; padding: 15px; margin-top: 15px; display: none;
-        }
-        .seccion-contenido.activo { display: block; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .btn-cerrar-seccion {
-            background: #1b2e20; color: var(--neon-green); border: 1px solid var(--neon-green);
-            padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; margin-bottom: 12px; cursor: pointer;
-            display: flex; align-items: center; gap: 5px; font-weight: bold;
-        }
-        .item-lista {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 0; border-bottom: 1px solid #1f3324; font-size: 0.85rem;
-        }
-        .item-lista:last-child { border-bottom: none; }
-        .precio { color: var(--neon-green); font-weight: bold; }
-
-        .app-footer { text-align: center; margin-top: 25px; font-size: 0.75rem; color: var(--text-gray); }
+        footer { text-align: center; font-size: 0.7rem; color: var(--text-gray); margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <header class="app-header">
+    <app-header>
         <h1>KIOSCO <span class="grinch-text">THE GRINCH</span></h1>
-        <div class="sub-header"><i class="fa-solid fa-location-dot" style="color: var(--neon-green);"></i> Av. Belgrano 963 | Tu kiosco de confianza</div>
-    </header>
+        <div class="sub-header"><i class="fas fa-map-marker-alt"></i> Av. Belgrano 963 | Tu kiosco de confianza</div>
+    </app-header>
 
-    <main class="app-main">
+    <div class="app-main">
         
-        <!-- BANNER OFERTAS DEL DÍA -->
-        <a href="#ofertas" class="banner-ofertas" onclick="mostrarSeccion('seccion-ofertas')">
+        <!-- Banner Ofertas -->
+        <a href="https://wa.me/5493624000000?text=Hola!%20Quiero%20consultar%20por%20las%20ofertas%20del%20día" class="banner-ofertas">
             <div class="banner-info">
-                <h2><i class="fa-solid fa-fire"></i> OFERTAS DEL DÍA</h2>
+                <h2><i class="fas fa-fire"></i> OFERTAS DEL DÍA</h2>
                 <p>¡No te las pierdas! Pizzas, picadas, promos y bebidas.</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300" alt="Ofertas">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=300&q=80" alt="Ofertas">
         </a>
 
-        <!-- TARJETAS VISUALES PRINCIPALES -->
-        <div class="grid-visual">
+        <!-- Grilla Principal -->
+        <div class="grid-visual" id="menu-principal">
             
-            <!-- COMIDAS -->
-            <a href="#comidas" class="card-visual" onclick="mostrarSeccion('seccion-comidas')">
+            <div class="card-visual" onclick="mostrarSeccion('seccion-bebidas')">
                 <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300" alt="Comidas">
+                    <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=300&q=80" alt="Bebidas">
+                </div>
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>BEBIDAS & GASEOSAS</h3>
+                        <p>Coca, Fanta, Sprite, Cervezas, Monster, Aguas</p>
+                    </div>
+                    <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </div>
+
+            <div class="card-visual" onclick="mostrarSeccion('seccion-jugos')">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=300&q=80" alt="Jugos">
+                </div>
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>JUGOS & ADES</h3>
+                        <p>Aquarius, Cepita, Ades (Diferentes medidas)</p>
+                    </div>
+                    <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </div>
+
+            <div class="card-visual" onclick="mostrarSeccion('seccion-comidas')">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=300&q=80" alt="Comidas">
                 </div>
                 <div class="card-content">
                     <div class="card-text">
                         <h3>COMIDAS</h3>
-                        <p>Pizzas • Empanadas • Tartas • Congelados • Patys</p>
+                        <p>Pizzas • Empanadas • Tartas • Congelados</p>
                     </div>
-                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
                 </div>
-            </a>
+            </div>
 
-            <!-- BEBIDAS -->
-            <a href="#bebidas" class="card-visual" onclick="mostrarSeccion('seccion-bebidas')">
+            <div class="card-visual" onclick="mostrarSeccion('seccion-kiosco')">
                 <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=300" alt="Bebidas">
-                </div>
-                <div class="card-content">
-                    <div class="card-text">
-                        <h3>BEBIDAS</h3>
-                        <p>Gaseosas (Coca, Sprite, Fanta) • Cervezas • Fernet • Vinos</p>
-                    </div>
-                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-            </a>
-
-            <!-- KIOSCO / GOLOSINAS -->
-            <a href="#kiosco" class="card-visual" onclick="mostrarSeccion('seccion-kiosco')">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=300" alt="Kiosco">
+                    <img src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&w=300&q=80" alt="Kiosco">
                 </div>
                 <div class="card-content">
                     <div class="card-text">
                         <h3>KIOSCO & DULCES</h3>
-                        <p>Alfajores • Chocolates • Golosinas • Snacks • Cigarrillos</p>
+                        <p>Alfajores • Chocolates • Golosinas • Snacks</p>
                     </div>
-                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
                 </div>
-            </a>
-
-            <!-- NOVEDADES / FARMACIA / OTROS -->
-            <a href="#novedades" class="card-visual" onclick="mostrarSeccion('seccion-novedades')">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300" alt="Novedades">
-                </div>
-                <div class="card-content">
-                    <div class="card-text">
-                        <h3>NOVEDADES & OTROS</h3>
-                        <p>Limpieza • Primeros Auxilios • Medicamentos esenciales</p>
-                    </div>
-                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-            </a>
+            </div>
 
         </div>
 
-        <!-- BOTONES INFERIORES -->
+        <!-- DETALLE DESPLEGABLE: BEBIDAS (Basado estrictamente en tu cartel) -->
+        <div id="seccion-bebidas" class="detalle-seccion">
+            <div class="detalle-header">
+                <h3><i class="fas fa-wine-bottle"></i> Lista de Precios Bebidas</h3>
+                <button class="btn-cerrar" onclick="cerrarSecciones()">Cerrar ✕</button>
+            </div>
+            <div class="item-lista"><span>Coca - Fanta - Sprite 1L (Retornable)</span><span>$2.800</span></div>
+            <div class="item-lista"><span>Coca 1.5L (Retornable)</span><span>$3.600</span></div>
+            <div class="item-lista"><span>Coca - Fanta - Sprite 2L (Retornable)</span><span>$3.500</span></div>
+            <div class="item-lista"><span>Coca - Sprite 2.25L (Descartable)</span><span>$4.500</span></div>
+            <div class="item-lista"><span>Coca - Fanta - Sprite 1.5L (Descartable)</span><span>$4.000</span></div>
+            <div class="item-lista"><span>Coca 600ml (Botella)</span><span>$3.900</span></div>
+            <div class="item-lista"><span>Coca - Fanta - Sprite 375ml (Botella)</span><span>$3.800</span></div>
+            <div class="item-lista"><span>Coca 354ml (Lata)</span><span>$2.200</span></div>
+            <div class="item-lista"><span>Monster</span><span>$3.500</span></div>
+            <div class="item-lista"><span>Fanta 2.5L</span><span>$4.400</span></div>
+            <div class="item-lista"><span>Crush</span><span>$4.400</span></div>
+        </div>
+
+        <!-- DETALLE DESPLEGABLE: JUGOS Y ADES -->
+        <div id="seccion-jugos" class="detalle-seccion">
+            <div class="detalle-header">
+                <h3><i class="fas fa-glass-whiskey"></i> Jugos, Aguas & Ades</h3>
+                <button class="btn-cerrar" onclick="cerrarSecciones()">Cerrar ✕</button>
+            </div>
+            <div class="item-lista"><span>Aquarius 2.25L</span><span>$2.700</span></div>
+            <div class="item-lista"><span>Aquarius 500ml</span><span>$1.500</span></div>
+            <div class="item-lista"><span>Cepita 1.5L</span><span>$3.800</span></div>
+            <div class="item-lista"><span>Cepita 1L (Botella)</span><span>$2.900</span></div>
+            <div class="item-lista"><span>Cepita 1L (Caja)</span><span>$2.500</span></div>
+            <div class="item-lista"><span>Cepita 200ml</span><span>$1.000</span></div>
+            <div class="item-lista"><span>Ades 1L (Caja)</span><span>$3.200</span></div>
+            <div class="item-lista"><span>Ades 200ml</span><span>$1.100</span></div>
+        </div>
+
+        <!-- DETALLE DESPLEGABLE: COMIDAS -->
+        <div id="seccion-comidas" class="detalle-seccion">
+            <div class="detalle-header">
+                <h3><i class="fas fa-pizza-slice"></i> Comidas & Congelados</h3>
+                <button class="btn-cerrar" onclick="cerrarSecciones()">Cerrar ✕</button>
+            </div>
+            <div class="item-lista"><span>Pizzas listas para hornear</span><span>Consultar</span></div>
+            <div class="item-lista"><span>Empanadas congeladas (x docena)</span><span>Variadas</span></div>
+            <div class="item-lista"><span>Patys y Medallones</span><span>Congelados</span></div>
+        </div>
+
+        <!-- DETALLE DESPLEGABLE: KIOSCO -->
+        <div id="seccion-kiosco" class="detalle-seccion">
+            <div class="detalle-header">
+                <h3><i class="fas fa-cookie-bite"></i> Kiosco & Golosinas</h3>
+                <button class="btn-cerrar" onclick="cerrarSecciones()">Cerrar ✕</button>
+            </div>
+            <div class="item-lista"><span>Alfajores primeras marcas</span><span>Variedad</span></div>
+            <div class="item-lista"><span>Chocolates y Barritas</span><span>Dulces</span></div>
+            <div class="item-lista"><span>Snacks y Papas Fritas</span><span>Chico / Grande</span></div>
+        </div>
+
+        <!-- Botones inferiores principales -->
         <div class="grid-botones-inferiores">
-            <a href="https://wa.me/5493624059555?text=Hola!%20Quiero%20hacer%20un%20pedido%20al%20Kiosco%20The%20Grinch." class="btn-accion-grande whatsapp" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i>
+            <a href="https://wa.me/5493624000000?text=Hola!%20Quiero%20hacer%20un%20pedido%20desde%20la%20web" class="btn-accion-grande">
+                <i class="fab fa-whatsapp"></i>
                 <span>HACER PEDIDO</span>
                 <small>Escribinos por WhatsApp</small>
             </a>
-            <a href="#pagos" class="btn-accion-grande" onclick="mostrarSeccion('seccion-pagos')">
-                <i class="fa-solid fa-wallet"></i>
+            <a href="https://wa.me/5493624000000?text=Hola!%20Te%20mando%20el%20comprobante%20de%20pago" class="btn-accion-grande">
+                <i class="fas fa-wallet"></i>
                 <span>PAGOS Y ENVÍOS</span>
                 <small>Alias: Grinch.963</small>
             </a>
         </div>
 
+        <footer>
+            Kiosco The Grinch &copy; 2026 - Av. Belgrano 963
+        </footer>
 
-        <!-- SECCIONES OCULTAS QUE SE DESPLIEGAN AL TOCAR -->
-
-        <!-- 1. OFERTAS -->
-        <div id="seccion-ofertas" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
-            <h3 style="color: #ff6666; margin-bottom: 12px;"><i class="fa-solid fa-fire"></i> Ofertas y Combos del Día</h3>
-            <div class="item-lista"><span>Combo 2 Pizzas + 1 Coca Grande</span><span class="precio">$11.000</span></div>
-            <div class="item-lista"><span>Combo 1 Pizza + 1 Coca</span><span class="precio">$7.000</span></div>
-            <div class="item-lista"><span>Combo Paty x2 (2 Paquetes + Pan x4)</span><span class="precio">$5.500</span></div>
-            <div class="item-lista"><span>Combo Panchos (Pan Viena + Salchichas)</span><span class="precio">$2.500</span></div>
-            <div class="item-lista"><span>Paty Finita (Unidad / Pack 3x6000)</span><span class="precio">$2.400 / $6.000</span></div>
-        </div>
-
-        <!-- 2. COMIDAS -->
-        <div id="seccion-comidas" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
-            <h3 style="color: var(--neon-green); margin-bottom: 12px;"><i class="fa-solid fa-utensils"></i> Comidas y Congelados</h3>
-            <div class="item-lista"><span>Prepizzas Prehorno (Muzzarella / Especial)</span><span class="precio">Consultar</span></div>
-            <div class="item-lista"><span>Empanadas Congeladas (Docena surtida)</span><span class="precio">Variedad</span></div>
-            <div class="item-lista"><span>Tartas Congeladas Caseras</span><span class="precio">Stock</span></div>
-            <div class="item-lista"><span>Chipacitos y Medialunas</span><span class="precio">Pack</span></div>
-        </div>
-
-        <!-- 3. BEBIDAS -->
-        <div id="seccion-bebidas" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
-            <h3 style="color: var(--neon-green); margin-bottom: 12px;"><i class="fa-solid fa-wine-glass"></i> Bebidas (Gaseosas, Cervezas, Fernet)</h3>
-            <div class="item-lista"><span>Coca-Cola / Sprite / Fanta (Retornable / Grande)</span><span class="precio">Heladas</span></div>
-            <div class="item-lista"><span>Coca-Cola / Sprite / Fanta (Lata y Chicas)</span><span class="precio">Individual</span></div>
-            <div class="item-lista"><span>Cervezas (Lata y Retornable)</span><span class="precio">Varias marcas</span></div>
-            <div class="item-lista"><span>Fernet Branca, Aperitivos y Vinos</span><span class="precio">Bodega</span></div>
-            <div class="item-lista"><span>Aguas Minerales y Sodas</span><span class="precio">Frescas</span></div>
-        </div>
-
-        <!-- 4. KIOSCO Y GOLOSINAS -->
-        <div id="seccion-kiosco" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
-            <h3 style="color: var(--neon-green); margin-bottom: 12px;"><i class="fa-solid fa-basket-shopping"></i> Alfajores, Chocolates y Golosinas</h3>
-            <div class="item-lista"><span>Alfajores Primeras Marcas (Triple y Simple)</span><span class="precio">Variedad</span></div>
-            <div class="item-lista"><span>Chocolates y Barritas</span><span class="precio">Dulces</span></div>
-            <div class="item-lista"><span>Galletitas Saladas y Dulces (Papas fritas, Snacks)</span><span class="precio">Surtido</span></div>
-            <div class="item-lista"><span>Cigarrillos y Enseres</span><span class="precio">Disponibles</span></div>
-        </div>
-
-        <!-- 5. NOVEDADES / FARMACIA -->
-        <div id="seccion-novedades" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
-            <h3 style="color: var(--neon-green); margin-bottom: 12px;"><i class="fa-solid fa-bolt"></i> Medicamentos y Limpieza</h3>
-            <div class="item-lista"><span>Ibuprofeno, Tafirol, Migral, Buscapina</span><span class="precio">Farmacia</span></div>
-            <div class="item-lista"><span>Lavandina, Detergente y Desodorante</span><span class="precio">Hogar</span></div>
-            <div class="item-lista"><span>Higiene Personal (Papel, Jabón, etc.)</span><span class="precio">Esenciales</span></div>
-        </div>
-
-        <!-- 6. PAGOS Y ENVÍOS -->
-        <div id="seccion-pagos" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
-            <h3 style="color: var(--neon-green); margin-bottom: 12px;"><i class="fa-solid fa-wallet"></i> Medios de Pago y Envíos</h3>
-            <div class="item-lista"><span>Alias Mercado Pago:</span><span class="precio" style="font-size: 1rem;">Grinch.963</span></div>
-            <div class="item-lista"><span>Envíos a 1 cuadra a la redonda</span><span class="precio">¡GRATIS! 🛵</span></div>
-            <div class="item-lista"><span>Dirección del Local</span><span class="precio">Av. Belgrano 963</span></div>
-        </div>
-
-    </main>
-
-    <footer class="app-footer">
-        <p>Kiosco The Grinch © 2026 - Av. Belgrano 963</p>
-    </footer>
+    </div>
 
     <script>
-        function mostrarSeccion(id) {
-            cerrarSecciones();
-            document.getElementById(id).classList.add('activo');
-            window.scrollTo({ top: 300, behavior: 'smooth' });
+        function mostrarSeccion(idSeccion) {
+            document.querySelectorAll('.detalle-seccion').forEach(sec => sec.classList.remove('activo'));
+            document.getElementById(idSeccion).classList.add('activo');
+            document.getElementById(idSeccion).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
         function cerrarSecciones() {
-            const secciones = document.querySelectorAll('.seccion-contenido');
-            secciones.forEach(sec => sec.classList.remove('activo'));
+            document.querySelectorAll('.detalle-seccion').forEach(sec => sec.classList.remove('activo'));
         }
     </script>
 </body>
