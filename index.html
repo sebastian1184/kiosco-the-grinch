@@ -16,7 +16,7 @@
             --accent-red: #ff3333;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-white); padding-bottom: 50px; }
+        body { background-color: var(--bg-dark); color: var(--text-white); padding-bottom: 90px; }
         
         app-header {
             background: linear-gradient(180deg, #122618 0%, #0a0f0d 100%);
@@ -71,10 +71,51 @@
         
         .item-lista {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.85rem;
+            padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.85rem; gap: 10px;
         }
-        .item-lista span:last-child { color: var(--neon-green); font-weight: 600; font-size: 0.8rem; background: rgba(0,255,102,0.1); padding: 2px 6px; border-radius: 4px; }
+        .item-info { flex-grow: 1; }
+        .item-precio { color: var(--neon-green); font-weight: 600; font-size: 0.8rem; display: block; margin-top: 2px; }
+        
+        .controles-cant { display: flex; align-items: center; gap: 8px; }
+        .btn-cant { background: rgba(0,255,102,0.2); color: var(--neon-green); border: 1px solid var(--neon-green); width: 26px; height: 26px; border-radius: 50%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .btn-cant:active { background: var(--neon-green); color: black; }
+        .txt-cant { font-weight: bold; font-size: 0.9rem; min-width: 15px; text-align: center; }
+
+        /* Botón flotante del Carrito */
+        .carrito-flotante {
+            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
+            background: linear-gradient(135deg, #00cc52 0%, #00993d 100%);
+            color: #0a0f0d; padding: 12px 24px; border-radius: 30px; font-weight: 900;
+            display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 20px rgba(0,255,102,0.5);
+            cursor: pointer; z-index: 2000; text-decoration: none; border: 2px solid #fff;
+            transition: transform 0.2s;
+        }
+        .carrito-flotante:active { transform: translateX(-50%) scale(0.95); }
+        .carrito-flotante i { font-size: 1.2rem; }
+
+        /* Modal del Carrito */
+        #modal-carrito {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 3000; display: none;
+            justify-content: center; align-items: flex-end;
+        }
+        .modal-contenido {
+            background: var(--bg-card); width: 100%; max-width: 600px;
+            max-height: 80vh; border-top: 3px solid var(--neon-green);
+            border-radius: 20px 20px 0 0; padding: 20px; overflow-y: auto;
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .modal-header h3 { color: var(--neon-green); font-size: 1.2rem; }
+        
+        .carrito-item-fila { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+        .carrito-total { font-size: 1.1rem; font-weight: bold; color: var(--neon-green); text-align: right; margin: 15px 0; }
+        
+        .btn-enviar-pedido {
+            background: #25d366; color: white; border: none; width: 100%; padding: 12px;
+            border-radius: 12px; font-weight: bold; font-size: 1rem; display: flex;
+            align-items: center; justify-content: center; gap: 8px; cursor: pointer; text-decoration: none;
+        }
 
         /* Botones inferiores principales */
         .grid-botones-inferiores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
@@ -173,18 +214,114 @@
                 <h3><i class="fas fa-wine-bottle"></i> Lista de Precios Bebidas</h3>
                 <button class="btn-cerrar" onclick="cerrarSecciones()">Cerrar ✕</button>
             </div>
-            <div class="item-lista"><span>Coca - Fanta - Sprite 1L (Retornable)</span><span>$2.800</span></div>
-            <div class="item-lista"><span>Coca 1.5L (Retornable)</span><span>$3.600</span></div>
-            <div class="item-lista"><span>Coca - Fanta - Sprite 2L (Retornable)</span><span>$3.500</span></div>
-            <div class="item-lista"><span>Coca - Sprite 2.25L (Descartable)</span><span>$4.500</span></div>
-            <div class="item-lista"><span>Coca - Fanta - Sprite 1.5L (Descartable)</span><span>$4.000</span></div>
-            <div class="item-lista"><span>Coca 600ml (Botella)</span><span>$1.900</span></div>
-            <div class="item-lista"><span>Coca - Fanta - Sprite 375ml (Botella)</span><span>$1.800</span></div>
-            <div class="item-lista"><span>Coca 354ml (Lata)</span><span>$2.200</span></div>
-            <div class="item-lista"><span>Monster</span><span>$3.000</span></div>
-            <div class="item-lista"><span>Fanta 2.5L (Manzana / Oferta)</span><span>$2.500</span></div>
-            <div class="item-lista"><span>Fanta 2.5L (Retornable Oferta)</span><span>$1.500</span></div>
-            <div class="item-lista"><span>Crush 3L</span><span>$2.400</span></div>
+            
+            <div class="item-lista">
+                <div class="item-info"><span>Coca - Fanta - Sprite 1L (Retornable)</span><span class="item-precio">$2.800</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 1L (Ret)', 2800, -1)">-</button>
+                    <span class="txt-cant" id="cant-Coca - Fanta - Sprite 1L (Ret)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 1L (Ret)', 2800, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Coca 1.5L (Retornable)</span><span class="item-precio">$3.600</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca 1.5L (Retornable)', 3600, -1)">-</button>
+                    <span class="txt-cant" id="cant-Coca 1.5L (Retornable)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca 1.5L (Retornable)', 3600, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Coca - Fanta - Sprite 2L (Retornable)</span><span class="item-precio">$3.500</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 2L (Ret)', 3500, -1)">-</button>
+                    <span class="txt-cant" id="cant-Coca - Fanta - Sprite 2L (Ret)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 2L (Ret)', 3500, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Coca - Sprite 2.25L (Descartable)</span><span class="item-precio">$4.500</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Sprite 2.25L (Desc)', 4500, -1)">-</button>
+                    <span class="txt-cant" id="cant-Coca - Sprite 2.25L (Desc)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Sprite 2.25L (Desc)', 4500, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Coca - Fanta - Sprite 1.5L (Descartable)</span><span class="item-precio">$4.000</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 1.5L (Desc)', 4000, -1)">-</button>
+                    <span class="txt-cant" id="cant-Coca - Fanta - Sprite 1.5L (Desc)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 1.5L (Desc)', 4000, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Coca 600ml (Botella)</span><span class="item-precio">$1.900</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca 600ml (Botella)', 1900, -1)">-</button>
+                    <span class="txt-cant" id="cant-Coca 600ml (Botella)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca 600ml (Botella)', 1900, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Coca - Fanta - Sprite 375ml (Botella)</span><span class="item-precio">$1.800</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 375ml', 1800, -1)">-</button>
+                    <span class="txt-cant" id="cant-Coca - Fanta - Sprite 375ml">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 375ml', 1800, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Coca 354ml (Lata)</span><span class="item-precio">$2.200</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca 354ml (Lata)', 2200, -1)">-</button>
+                    <span class="txt-cant" id="cant-Coca 354ml (Lata)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Coca 354ml (Lata)', 2200, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Monster</span><span class="item-precio">$3.000</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Monster', 3000, -1)">-</button>
+                    <span class="txt-cant" id="cant-Monster">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Monster', 3000, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Fanta 2.5L (Manzana / Oferta)</span><span class="item-precio">$2.500</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Fanta 2.5L Manzana (Oferta)', 2500, -1)">-</button>
+                    <span class="txt-cant" id="cant-Fanta 2.5L Manzana (Oferta)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Fanta 2.5L Manzana (Oferta)', 2500, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Fanta 2.5L (Retornable Oferta)</span><span class="item-precio">$1.500</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Fanta 2.5L Retornable (Oferta)', 1500, -1)">-</button>
+                    <span class="txt-cant" id="cant-Fanta 2.5L Retornable (Oferta)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Fanta 2.5L Retornable (Oferta)', 1500, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Crush 3L</span><span class="item-precio">$2.400</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Crush 3L', 2400, -1)">-</button>
+                    <span class="txt-cant" id="cant-Crush 3L">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Crush 3L', 2400, 1)">+</button>
+                </div>
+            </div>
         </div>
 
         <!-- DETALLE DESPLEGABLE: JUGOS Y ADES -->
@@ -193,15 +330,87 @@
                 <h3><i class="fas fa-glass-whiskey"></i> Jugos, Aguas & Ades</h3>
                 <button class="btn-cerrar" onclick="cerrarSecciones()">Cerrar ✕</button>
             </div>
-            <div class="item-lista"><span>Aquarius 2.25L</span><span>$2.700</span></div>
-            <div class="item-lista"><span>Aquarius 500ml</span><span>$1.500</span></div>
-            <div class="item-lista"><span>Cepita 3L</span><span>$3.000</span></div>
-            <div class="item-lista"><span>Cepita 1.5L</span><span>$3.800</span></div>
-            <div class="item-lista"><span>Cepita 1L (Botella)</span><span>$2.900</span></div>
-            <div class="item-lista"><span>Cepita 1L (Caja)</span><span>$2.500</span></div>
-            <div class="item-lista"><span>Cepita 200ml</span><span>$1.000</span></div>
-            <div class="item-lista"><span>Ades 1L (Caja)</span><span>$3.200</span></div>
-            <div class="item-lista"><span>Ades 200ml</span><span>$1.100</span></div>
+            
+            <div class="item-lista">
+                <div class="item-info"><span>Aquarius 2.25L</span><span class="item-precio">$2.700</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Aquarius 2.25L', 2700, -1)">-</button>
+                    <span class="txt-cant" id="cant-Aquarius 2.25L">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Aquarius 2.25L', 2700, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Aquarius 500ml</span><span class="item-precio">$1.500</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Aquarius 500ml', 1500, -1)">-</button>
+                    <span class="txt-cant" id="cant-Aquarius 500ml">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Aquarius 500ml', 1500, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Cepita 3L</span><span class="item-precio">$3.000</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 3L', 3000, -1)">-</button>
+                    <span class="txt-cant" id="cant-Cepita 3L">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 3L', 3000, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Cepita 1.5L</span><span class="item-precio">$3.800</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1.5L', 3800, -1)">-</button>
+                    <span class="txt-cant" id="cant-Cepita 1.5L">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1.5L', 3800, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Cepita 1L (Botella)</span><span class="item-precio">$2.900</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1L (Botella)', 2900, -1)">-</button>
+                    <span class="txt-cant" id="cant-Cepita 1L (Botella)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1L (Botella)', 2900, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Cepita 1L (Caja)</span><span class="item-precio">$2.500</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1L (Caja)', 2500, -1)">-</button>
+                    <span class="txt-cant" id="cant-Cepita 1L (Caja)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1L (Caja)', 2500, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Cepita 200ml</span><span class="item-precio">$1.000</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 200ml', 1000, -1)">-</button>
+                    <span class="txt-cant" id="cant-Cepita 200ml">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 200ml', 1000, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Ades 1L (Caja)</span><span class="item-precio">$3.200</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Ades 1L (Caja)', 3200, -1)">-</button>
+                    <span class="txt-cant" id="cant-Ades 1L (Caja)">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Ades 1L (Caja)', 3200, 1)">+</button>
+                </div>
+            </div>
+
+            <div class="item-lista">
+                <div class="item-info"><span>Ades 200ml</span><span class="item-precio">$1.100</span></div>
+                <div class="controles-cant">
+                    <button class="btn-cant" onclick="cambiarCantidad('Ades 200ml', 1100, -1)">-</button>
+                    <span class="txt-cant" id="cant-Ades 200ml">0</span>
+                    <button class="btn-cant" onclick="cambiarCantidad('Ades 200ml', 1100, 1)">+</button>
+                </div>
+            </div>
         </div>
 
         <!-- DETALLE DESPLEGABLE: COMIDAS -->
@@ -247,7 +456,32 @@
 
     </div>
 
+    <!-- Botón Flotante Carrito -->
+    <div class="carrito-flotante" onclick="abrirCarrito()">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="contador-carrito">Ver Carrito (0)</span>
+    </div>
+
+    <!-- Modal del Carrito -->
+    <div id="modal-carrito" onclick="cerrarCarritoFuera(event)">
+        <div class="modal-contenido">
+            <div class="modal-header">
+                <h3><i class="fas fa-shopping-bag"></i> Tu Pedido en El Grinch</h3>
+                <button class="btn-cerrar" onclick="cerrarCarrito()">Cerrar ✕</button>
+            </div>
+            <div id="lista-carrito-items">
+                <p style="text-align: center; color: var(--text-gray); padding: 20px;">Tu carrito está vacío.</p>
+            </div>
+            <div class="carrito-total" id="carrito-total-txt">Total: $0</div>
+            <button class="btn-enviar-pedido" onclick="enviarPedidoWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
+            </button>
+        </div>
+    </div>
+
     <script>
+        let carrito = {};
+
         function mostrarSeccion(idSeccion) {
             document.querySelectorAll('.detalle-seccion').forEach(sec => sec.classList.remove('activo'));
             document.getElementById(idSeccion).classList.add('activo');
@@ -255,6 +489,101 @@
         }
         function cerrarSecciones() {
             document.querySelectorAll('.detalle-seccion').forEach(sec => sec.classList.remove('activo'));
+        }
+
+        function cambiarCantidad(nombre, precio, cambio) {
+            if (!carrito[nombre]) {
+                carrito[nombre] = { precio: precio, cantidad: 0 };
+            }
+            carrito[nombre].cantidad += cambio;
+            if (carrito[nombre].cantidad <= 0) {
+                delete carrito[nombre];
+                carrito[nombre] = { precio: precio, cantidad: 0 };
+            }
+            
+            // Actualiza visualmente en la pantalla
+            const el = document.getElementById('cant-' + nombre);
+            if (el) el.innerText = carrito[nombre].cantidad;
+
+            actualizarContadorFlotante();
+        }
+
+        function actualizarContadorFlotante() {
+            let totalItems = 0;
+            for (let item in carrito) {
+                totalItems += carrito[item].cantidad;
+            }
+            document.getElementById('contador-carrito').innerText = `Ver Carrito (${totalItems})`;
+        }
+
+        function abrirCarrito() {
+            let contenedor = document.getElementById('lista-carrito-items');
+            contenedor.innerHTML = '';
+            let totalGeneral = 0;
+            let hayItems = false;
+
+            for (let item in carrito) {
+                if (carrito[item].cantidad > 0) {
+                    hayItems = true;
+                    let subtotal = carrito[item].precio * carrito[item].cantidad;
+                    totalGeneral += subtotal;
+
+                    contenedor.innerHTML += `
+                        <div class="carrito-item-fila">
+                            <div>
+                                <strong>${item}</strong><br>
+                                <small style="color:var(--text-gray);">${carrito[item].cantidad} x $${carrito[item].precio.toLocaleString()}</small>
+                            </div>
+                            <div style="color:var(--neon-green); font-weight:bold;">
+                                $${subtotal.toLocaleString()}
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            if (!hayItems) {
+                contenedor.innerHTML = '<p style="text-align: center; color: var(--text-gray); padding: 20px;">Tu carrito está vacío.</p>';
+            }
+
+            document.getElementById('carrito-total-txt').innerText = `Total: $${totalGeneral.toLocaleString()}`;
+            document.getElementById('modal-carrito').style.display = 'flex';
+        }
+
+        function cerrarCarrito() {
+            document.getElementById('modal-carrito').style.display = 'none';
+        }
+
+        function cerrarCarritoFuera(event) {
+            if (event.target.id === 'modal-carrito') {
+                cerrarCarrito();
+            }
+        }
+
+        function enviarPedidoWhatsApp() {
+            let mensaje = "Hola! Kiosco The Grinch, quiero hacer el siguiente pedido:\n\n";
+            let totalGeneral = 0;
+            let hayItems = false;
+
+            for (let item in carrito) {
+                if (carrito[item].cantidad > 0) {
+                    hayItems = true;
+                    let subtotal = carrito[item].precio * carrito[item].cantidad;
+                    totalGeneral += subtotal;
+                    mensaje += `• ${carrito[item].cantidad}x ${item} ($${subtotal.toLocaleString()})\n`;
+                }
+            }
+
+            if (!hayItems) {
+                alert("Primero agrega algunos productos al carrito.");
+                return;
+            }
+
+            mensaje += `\n*TOTAL A PAGAR: $${totalGeneral.toLocaleString()}*`;
+            mensaje += `\n\nDirección de entrega / Retiro en Av. Belgrano 963`;
+
+            let url = `https://wa.me/5493624059555?text=` + encodeURIComponent(mensaje);
+            window.open(url, '_blank');
         }
     </script>
 </body>
