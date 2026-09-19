@@ -7,223 +7,250 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #121212;
-            --bg-card: #1e1e1e;
+            --bg-dark: #0a0f0d;
+            --bg-card: #141f17;
             --neon-green: #00ff66;
+            --neon-border: #00cc52;
             --text-white: #ffffff;
-            --text-gray: #b0b0b0;
-            --border-color: #2c3e30;
+            --text-gray: #b0c4b1;
+            --accent-red: #ff3333;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-white); padding-bottom: 40px; }
+        body { background-color: var(--bg-dark); color: var(--text-white); padding-bottom: 50px; }
         
         .app-header {
-            display: flex; justify-content: space-between; align-items: center;
-            background-color: #181818; padding: 15px 20px;
-            border-bottom: 2px solid var(--neon-green); position: sticky; top: 0; z-index: 1000;
+            background: linear-gradient(180deg, #122618 0%, #0a0f0d 100%);
+            padding: 15px; border-bottom: 2px solid var(--neon-green);
+            text-align: center; position: sticky; top: 0; z-index: 1000;
         }
-        .app-header h1 { font-size: 1.2rem; font-weight: bold; }
-        .grinch-text { color: var(--neon-green); text-shadow: 0 0 8px rgba(0, 255, 102, 0.4); }
-        .app-main { padding: 15px; max-width: 600px; margin: 0 auto; }
+        .app-header h1 { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; }
+        .grinch-text { color: var(--neon-green); text-shadow: 0 0 10px rgba(0, 255, 102, 0.6); }
+        .sub-header { font-size: 0.75rem; color: var(--text-gray); margin-top: 2px; }
+
+        .app-main { padding: 12px; max-width: 600px; margin: 0 auto; }
+
+        /* Banner Ofertas del Día con Foto Visual */
+        .banner-ofertas {
+            background: linear-gradient(135deg, #260d0d 14%, #141f17 100%);
+            border: 2px solid var(--accent-red); border-radius: 14px;
+            padding: 12px; margin-bottom: 15px; display: flex; align-items: center;
+            justify-content: space-between; text-decoration: none; color: var(--text-white);
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.25);
+        }
+        .banner-ofertas img { width: 90px; height: 75px; object-fit: cover; border-radius: 8px; border: 1px solid var(--accent-red); }
+        .banner-info h2 { font-size: 1rem; color: #ff6666; display: flex; align-items: center; gap: 5px; }
+        .banner-info p { font-size: 0.75rem; color: var(--text-gray); margin-top: 3px; }
+
+        /* Grilla de Tarjetas Visuales (Estilo App) */
+        .grid-visual { display: flex; flex-direction: column; gap: 12px; margin-bottom: 15px; }
         
-        .banner-bienvenida {
-            background: linear-gradient(135deg, #18281a 0%, #121212 100%);
-            border: 1px solid var(--neon-green); padding: 15px; border-radius: 12px;
-            text-align: center; margin-bottom: 15px;
+        .card-visual {
+            background-color: var(--bg-card); border: 2px solid var(--neon-border);
+            border-radius: 14px; overflow: hidden; display: flex; align-items: center;
+            text-decoration: none; color: var(--text-white); transition: transform 0.1s;
+            box-shadow: 0 4px 10px rgba(0, 255, 102, 0.1);
         }
-        .banner-bienvenida h2 { font-size: 1rem; margin-bottom: 5px; }
-        .banner-bienvenida p { font-size: 0.85rem; color: var(--text-gray); }
+        .card-visual:active { transform: scale(0.98); }
+        .card-img-container { width: 110px; height: 95px; flex-shrink: 0; background: #000; position: relative; }
+        .card-img-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
+        
+        .card-content { padding: 12px; flex-grow: 1; display: flex; justify-content: space-between; align-items: center; }
+        .card-text h3 { font-size: 1rem; color: var(--neon-green); margin-bottom: 3px; }
+        .card-text p { font-size: 0.75rem; color: var(--text-gray); line-height: 1.2; }
+        .card-arrow { font-size: 1.2rem; color: var(--neon-green); background: rgba(0,255,102,0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-left: 8px; flex-shrink: 0; }
 
-        /* Botón Ofertas Destacado */
-        .btn-ofertas-exclusivo {
-            display: flex; align-items: center; background: linear-gradient(135deg, #2a1215 0%, #181818 100%);
-            border: 2px solid #ff4d4d; padding: 15px; border-radius: 12px;
-            text-decoration: none; color: var(--text-white); gap: 15px; margin-bottom: 20px;
-            box-shadow: 0 0 12px rgba(255, 77, 77, 0.25);
+        /* Botones Inferiores Principales */
+        .grid-botones-inferiores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        
+        .btn-accion-grande {
+            background: linear-gradient(135deg, #122618 0%, #0d3b1e 100%);
+            border: 2px solid var(--neon-green); border-radius: 12px; padding: 12px;
+            text-decoration: none; color: var(--text-white); display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center; gap: 5px;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
         }
+        .btn-accion-grande.whatsapp { background: linear-gradient(135deg, #0d3b1e 0%, #104e25 100%); }
+        .btn-accion-grande i { font-size: 1.4rem; color: var(--neon-green); }
+        .btn-accion-grande span { font-size: 0.8rem; font-weight: bold; }
+        .btn-accion-grande small { font-size: 0.65rem; color: var(--text-gray); }
 
-        .seccion-titulo { margin: 20px 0 10px 0; }
-        .seccion-titulo h2 { font-size: 1.05rem; }
-        .seccion-titulo p { font-size: 0.75rem; color: var(--text-gray); }
-
-        .grid-categorias { display: flex; flex-direction: column; gap: 10px; }
-        .card-categoria {
-            display: flex; align-items: center; background-color: var(--bg-card);
-            border: 1px solid var(--border-color); padding: 12px 15px; border-radius: 10px;
-            text-decoration: none; color: var(--text-white);
-        }
-        .card-icon { font-size: 1.4rem; color: var(--neon-green); margin-right: 15px; min-width: 30px; text-align: center; }
-        .card-info h3 { font-size: 0.95rem; margin-bottom: 2px; }
-        .card-info p { font-size: 0.75rem; color: var(--text-gray); }
-
-        /* Acordeón / Secciones internas de contenido */
+        /* Acordeones / Secciones Detalladas por Categoría */
         .seccion-contenido {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 10px; padding: 15px; margin-top: 15px; display: none;
+            background: var(--bg-card); border: 1px solid var(--neon-border);
+            border-radius: 12px; padding: 15px; margin-top: 15px; display: none;
         }
-        .seccion-contenido.activo { display: block; }
+        .seccion-contenido.activo { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .btn-cerrar-seccion {
+            background: #1b2e20; color: var(--neon-green); border: 1px solid var(--neon-green);
+            padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; margin-bottom: 12px; cursor: pointer;
+            display: flex; align-items: center; gap: 5px; font-weight: bold;
+        }
         .item-lista {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 8px 0; border-bottom: 1px solid #2a2a2a; font-size: 0.85rem;
+            padding: 10px 0; border-bottom: 1px solid #1f3324; font-size: 0.85rem;
         }
         .item-lista:last-child { border-bottom: none; }
         .precio { color: var(--neon-green); font-weight: bold; }
 
-        .acciones-rapidas { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .btn-whatsapp {
-            display: flex; align-items: center; justify-content: center;
-            background-color: #25d366; color: #fff; padding: 14px; border-radius: 10px;
-            text-decoration: none; font-weight: bold; font-size: 0.95rem; gap: 10px;
-        }
-        .btn-cerrar-seccion {
-            background: #333; color: #fff; border: none; padding: 6px 12px;
-            border-radius: 6px; font-size: 0.8rem; margin-bottom: 10px; cursor: pointer;
-        }
-        .app-footer { text-align: center; margin-top: 30px; font-size: 0.75rem; color: var(--text-gray); }
+        .app-footer { text-align: center; margin-top: 25px; font-size: 0.75rem; color: var(--text-gray); }
     </style>
 </head>
 <body>
 
     <header class="app-header">
-        <div class="menu-icon"><i class="fa-solid fa-store"></i></div>
-        <div class="logo-container">
-            <h1>KIOSCO <span class="grinch-text">THE GRINCH</span></h1>
-        </div>
-        <div class="location-icon"><i class="fa-solid fa-bolt" style="color: var(--neon-green);"></i></div>
+        <h1>KIOSCO <span class="grinch-text">THE GRINCH</span></h1>
+        <div class="sub-header"><i class="fa-solid fa-location-dot" style="color: var(--neon-green);"></i> Av. Belgrano 963 | Tu kiosco de confianza</div>
     </header>
 
     <main class="app-main">
         
-        <div class="banner-bienvenida">
-            <h2>Todo lo que buscás, más cerca tuyo 🐾</h2>
-            <p><i class="fa-solid fa-location-dot" style="color: var(--neon-green);"></i> Av. Belgrano 963</p>
-        </div>
-
-        <!-- BOTÓN OFERTAS Y COMBOS -->
-        <a href="#ofertas" class="btn-ofertas-exclusivo" onclick="mostrarSeccion('seccion-ofertas')">
-            <i class="fa-solid fa-fire" style="color: #ff4d4d; font-size: 1.5rem;"></i>
-            <div>
-                <span style="display: block; font-size: 1.05rem; font-weight: bold;">OFERTAS Y COMBOS</span>
-                <span style="font-size: 0.75rem; color: var(--text-gray);">Comidas, Bebidas, Almacén y Limpieza</span>
+        <!-- BANNER OFERTAS DEL DÍA -->
+        <a href="#ofertas" class="banner-ofertas" onclick="mostrarSeccion('seccion-ofertas')">
+            <div class="banner-info">
+                <h2><i class="fa-solid fa-fire"></i> OFERTAS DEL DÍA</h2>
+                <p>¡No te las pierdas! Pizzas, picadas, promos y bebidas.</p>
             </div>
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300" alt="Ofertas">
         </a>
 
-        <div class="seccion-titulo">
-            <h2>Menú de Secciones</h2>
-            <p>Tocá cualquier categoría para ver los productos</p>
+        <!-- TARJETAS VISUALES PRINCIPALES -->
+        <div class="grid-visual">
+            
+            <!-- COMIDAS -->
+            <a href="#comidas" class="card-visual" onclick="mostrarSeccion('seccion-comidas')">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300" alt="Comidas">
+                </div>
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>COMIDAS</h3>
+                        <p>Pizzas • Empanadas • Tartas • Congelados • Patys</p>
+                    </div>
+                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+            </a>
+
+            <!-- BEBIDAS -->
+            <a href="#bebidas" class="card-visual" onclick="mostrarSeccion('seccion-bebidas')">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=300" alt="Bebidas">
+                </div>
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>BEBIDAS</h3>
+                        <p>Gaseosas (Coca, Sprite, Fanta) • Cervezas • Fernet • Vinos</p>
+                    </div>
+                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+            </a>
+
+            <!-- KIOSCO / GOLOSINAS -->
+            <a href="#kiosco" class="card-visual" onclick="mostrarSeccion('seccion-kiosco')">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=300" alt="Kiosco">
+                </div>
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>KIOSCO & DULCES</h3>
+                        <p>Alfajores • Chocolates • Golosinas • Snacks • Cigarrillos</p>
+                    </div>
+                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+            </a>
+
+            <!-- NOVEDADES / FARMACIA / OTROS -->
+            <a href="#novedades" class="card-visual" onclick="mostrarSeccion('seccion-novedades')">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=300" alt="Novedades">
+                </div>
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>NOVEDADES & OTROS</h3>
+                        <p>Limpieza • Primeros Auxilios • Medicamentos esenciales</p>
+                    </div>
+                    <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+            </a>
+
         </div>
 
-        <div class="grid-categorias">
-            <div class="card-categoria" onclick="mostrarSeccion('seccion-comidas')">
-                <div class="card-icon"><i class="fa-solid fa-utensils"></i></div>
-                <div class="card-info">
-                    <h3>Comidas y Congelados</h3>
-                    <p>Prepizzas, empanadas, tartas, chipacitos, medialunas y patys.</p>
-                </div>
-            </div>
-
-            <div class="card-categoria" onclick="mostrarSeccion('seccion-bebidas')">
-                <div class="card-icon"><i class="fa-solid fa-wine-glass"></i></div>
-                <div class="card-info">
-                    <h3>Bebidas, Aguas y Jugos</h3>
-                    <p>Cervezas, fernet, aperitivos, vinos, sodas y jugos.</p>
-                </div>
-            </div>
-
-            <div class="card-categoria" onclick="mostrarSeccion('seccion-almacen')">
-                <div class="card-icon"><i class="fa-solid fa-basket-shopping"></i></div>
-                <div class="card-info">
-                    <h3>Almacén y Golosinas</h3>
-                    <p>Alfajores, chocolates, galletitas, snacks y esenciales.</p>
-                </div>
-            </div>
-
-            <div class="card-categoria" onclick="mostrarSeccion('seccion-limpieza')">
-                <div class="card-icon"><i class="fa-solid fa-pump-soap"></i></div>
-                <div class="card-info">
-                    <h3>Limpieza y Cuidado Personal</h3>
-                    <p>Lavandina, detergente, higiene personal y primeros auxilios.</p>
-                </div>
-            </div>
-
-            <div class="card-categoria" onclick="mostrarSeccion('seccion-pagos')">
-                <div class="card-icon"><i class="fa-solid fa-wallet"></i></div>
-                <div class="card-info">
-                    <h3>Envíos y Medios de Pago</h3>
-                    <p>Alias: <strong>Grinch.963</strong> | Envío gratis a 1 cuadra.</p>
-                </div>
-            </div>
+        <!-- BOTONES INFERIORES -->
+        <div class="grid-botones-inferiores">
+            <a href="https://wa.me/5493624059555?text=Hola!%20Quiero%20hacer%20un%20pedido%20al%20Kiosco%20The%20Grinch." class="btn-accion-grande whatsapp" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>HACER PEDIDO</span>
+                <small>Escribinos por WhatsApp</small>
+            </a>
+            <a href="#pagos" class="btn-accion-grande" onclick="mostrarSeccion('seccion-pagos')">
+                <i class="fa-solid fa-wallet"></i>
+                <span>PAGOS Y ENVÍOS</span>
+                <small>Alias: Grinch.963</small>
+            </a>
         </div>
 
-        <!-- SECCIONES OCULTAS QUE SE ABREN AL TOCAR -->
 
-        <!-- 1. OFERTAS Y COMBOS -->
+        <!-- SECCIONES OCULTAS QUE SE DESPLIEGAN AL TOCAR -->
+
+        <!-- 1. OFERTAS -->
         <div id="seccion-ofertas" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar</button>
-            <h3 style="color: #ff4d4d; margin-bottom: 10px;"><i class="fa-solid fa-fire"></i> Ofertas y Combos</h3>
-            <div class="item-lista"><span>Combo 2 Pizzas + 1 Coca</span><span class="precio">$11.000</span></div>
+            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
+            <h3 style="color: #ff6666; margin-bottom: 12px;"><i class="fa-solid fa-fire"></i> Ofertas y Combos del Día</h3>
+            <div class="item-lista"><span>Combo 2 Pizzas + 1 Coca Grande</span><span class="precio">$11.000</span></div>
             <div class="item-lista"><span>Combo 1 Pizza + 1 Coca</span><span class="precio">$7.000</span></div>
-            <div class="item-lista"><span>Combo Paty x2 (2 Pquetes + Pan x4)</span><span class="precio">$5.500</span></div>
+            <div class="item-lista"><span>Combo Paty x2 (2 Paquetes + Pan x4)</span><span class="precio">$5.500</span></div>
             <div class="item-lista"><span>Combo Panchos (Pan Viena + Salchichas)</span><span class="precio">$2.500</span></div>
-            <div class="item-lista"><span>Paty Finita (Unidad / 3x6000)</span><span class="precio">$2.400 / $6.000</span></div>
-            <div class="item-lista"><span>Combos Pebetes (con Baggio / Lata / Snack)</span><span class="precio">Promo</span></div>
-            <div class="item-lista"><span>Combos Bebidas (Fernet / Gancia / Vodka)</span><span class="precio">Especiales</span></div>
-            <div class="item-lista"><span>Super Combo Almacén (Arroz, Fideos, Aceite...)</span><span class="precio">Canasta</span></div>
-            <div class="item-lista"><span>Combo Limpieza y Cuidado Personal</span><span class="precio">Ahorro</span></div>
+            <div class="item-lista"><span>Paty Finita (Unidad / Pack 3x6000)</span><span class="precio">$2.400 / $6.000</span></div>
         </div>
 
         <!-- 2. COMIDAS -->
         <div id="seccion-comidas" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar</button>
-            <h3 style="color: var(--neon-green); margin-bottom: 10px;"><i class="fa-solid fa-utensils"></i> Comidas y Congelados</h3>
-            <div class="item-lista"><span>Prepizzas Prehorno (Muzzarella, Especial, Calabresa)</span><span class="precio">Disponible</span></div>
-            <div class="item-lista"><span>Empanadas Congeladas (Jamón y Queso, Pollo, Carne)</span><span class="precio">Unidad</span></div>
-            <div class="item-lista"><span>Tartas Congeladas Caseras</span><span class="precio">Variedad</span></div>
-            <div class="item-lista"><span>Chipacitos y Medialunas Congeladas</span><span class="precio">Pack</span></div>
+            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
+            <h3 style="color: var(--neon-green); margin-bottom: 12px;"><i class="fa-solid fa-utensils"></i> Comidas y Congelados</h3>
+            <div class="item-lista"><span>Prepizzas Prehorno (Muzzarella / Especial)</span><span class="precio">Consultar</span></div>
+            <div class="item-lista"><span>Empanadas Congeladas (Docena surtida)</span><span class="precio">Variedad</span></div>
+            <div class="item-lista"><span>Tartas Congeladas Caseras</span><span class="precio">Stock</span></div>
+            <div class="item-lista"><span>Chipacitos y Medialunas</span><span class="precio">Pack</span></div>
         </div>
 
         <!-- 3. BEBIDAS -->
         <div id="seccion-bebidas" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar</button>
-            <h3 style="color: var(--neon-green); margin-bottom: 10px;"><i class="fa-solid fa-wine-glass"></i> Bebidas</h3>
-            <div class="item-lista"><span>Aguas Minerales y Sodas</span><span class="precio">Frías</span></div>
-            <div class="item-lista"><span>Jugos (Litro Baggio/Ades y menores)</span><span class="precio">Variedad</span></div>
-            <div class="item-lista"><span>Cervezas (Lata y Retornable)</span><span class="precio">Heladas</span></div>
-            <div class="item-lista"><span>Fernet, Aperitivos y Vinos</span><span class="precio">Bodega</span></div>
+            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
+            <h3 style="color: var(--neon-green); margin-bottom: 12px;"><i class="fa-solid fa-wine-glass"></i> Bebidas (Gaseosas, Cervezas, Fernet)</h3>
+            <div class="item-lista"><span>Coca-Cola / Sprite / Fanta (Retornable / Grande)</span><span class="precio">Heladas</span></div>
+            <div class="item-lista"><span>Coca-Cola / Sprite / Fanta (Lata y Chicas)</span><span class="precio">Individual</span></div>
+            <div class="item-lista"><span>Cervezas (Lata y Retornable)</span><span class="precio">Varias marcas</span></div>
+            <div class="item-lista"><span>Fernet Branca, Aperitivos y Vinos</span><span class="precio">Bodega</span></div>
+            <div class="item-lista"><span>Aguas Minerales y Sodas</span><span class="precio">Frescas</span></div>
         </div>
 
-        <!-- 4. ALMACÉN -->
-        <div id="seccion-almacen" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar</button>
-            <h3 style="color: var(--neon-green); margin-bottom: 10px;"><i class="fa-solid fa-basket-shopping"></i> Almacén y Kiosco</h3>
-            <div class="item-lista"><span>Alfajores, Chocolates y Golosinas</span><span class="precio">Dulces</span></div>
-            <div class="item-lista"><span>Galletitas y Papa Fritas (Snacks)</span><span class="precio">Surtidos</span></div>
-            <div class="item-lista"><span>Yerba, Azúcar y Esenciales</span><span class="precio">Almacén</span></div>
+        <!-- 4. KIOSCO Y GOLOSINAS -->
+        <div id="seccion-kiosco" class="seccion-contenido">
+            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
+            <h3 style="color: var(--neon-green); margin-bottom: 12px;"><i class="fa-solid fa-basket-shopping"></i> Alfajores, Chocolates y Golosinas</h3>
+            <div class="item-lista"><span>Alfajores Primeras Marcas (Triple y Simple)</span><span class="precio">Variedad</span></div>
+            <div class="item-lista"><span>Chocolates y Barritas</span><span class="precio">Dulces</span></div>
+            <div class="item-lista"><span>Galletitas Saladas y Dulces (Papas fritas, Snacks)</span><span class="precio">Surtido</span></div>
+            <div class="item-lista"><span>Cigarrillos y Enseres</span><span class="precio">Disponibles</span></div>
         </div>
 
-        <!-- 5. LIMPIEZA -->
-        <div id="seccion-limpieza" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar</button>
-            <h3 style="color: var(--neon-green); margin-bottom: 10px;"><i class="fa-solid fa-pump-soap"></i> Limpieza y Salud</h3>
+        <!-- 5. NOVEDADES / FARMACIA -->
+        <div id="seccion-novedades" class="seccion-contenido">
+            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
+            <h3 style="color: var(--neon-green); margin-bottom: 12px;"><i class="fa-solid fa-bolt"></i> Medicamentos y Limpieza</h3>
+            <div class="item-lista"><span>Ibuprofeno, Tafirol, Migral, Buscapina</span><span class="precio">Farmacia</span></div>
             <div class="item-lista"><span>Lavandina, Detergente y Desodorante</span><span class="precio">Hogar</span></div>
-            <div class="item-lista"><span>Rollos de Cocina y Papel Higiénico</span><span class="precio">Celulosa</span></div>
-            <div class="item-lista"><span>Jabón, Cepillo, Colino y Maquinitas</span><span class="precio">Higiene</span></div>
+            <div class="item-lista"><span>Higiene Personal (Papel, Jabón, etc.)</span><span class="precio">Esenciales</span></div>
         </div>
 
         <!-- 6. PAGOS Y ENVÍOS -->
         <div id="seccion-pagos" class="seccion-contenido">
-            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar</button>
-            <h3 style="color: var(--neon-green); margin-bottom: 10px;"><i class="fa-solid fa-wallet"></i> Envíos y Pagos</h3>
-            <div class="item-lista"><span>Alias de Pago (Transferencia / Mercado Pago)</span><span class="precio" style="font-size: 1rem;">Grinch.963</span></div>
+            <button class="btn-cerrar-seccion" onclick="cerrarSecciones()"><i class="fa-solid fa-xmark"></i> Cerrar sección</button>
+            <h3 style="color: var(--neon-green); margin-bottom: 12px;"><i class="fa-solid fa-wallet"></i> Medios de Pago y Envíos</h3>
+            <div class="item-lista"><span>Alias Mercado Pago:</span><span class="precio" style="font-size: 1rem;">Grinch.963</span></div>
             <div class="item-lista"><span>Envíos a 1 cuadra a la redonda</span><span class="precio">¡GRATIS! 🛵</span></div>
-            <div class="item-lista"><span>Envíos a más de 2 cuadras</span><span class="precio">Con Recargo</span></div>
-        </div>
-
-        <!-- BOTÓN WHATSAPP -->
-        <div class="acciones-rapidas">
-            <a href="https://wa.me/5493624059555?text=Hola!%20Quiero%20hacer%20un%20pedido%20al%20Kiosco%20The%20Grinch." class="btn-whatsapp" target="_blank">
-                <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem;"></i> HACER PEDIDO POR WHATSAPP
-            </a>
+            <div class="item-lista"><span>Dirección del Local</span><span class="precio">Av. Belgrano 963</span></div>
         </div>
 
     </main>
@@ -236,7 +263,7 @@
         function mostrarSeccion(id) {
             cerrarSecciones();
             document.getElementById(id).classList.add('activo');
-            window.scrollTo({ top: 200, behavior: 'smooth' });
+            window.scrollTo({ top: 300, behavior: 'smooth' });
         }
         function cerrarSecciones() {
             const secciones = document.querySelectorAll('.seccion-contenido');
@@ -245,4 +272,3 @@
     </script>
 </body>
 </html>
-
