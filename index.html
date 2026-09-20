@@ -1,590 +1,71 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiosco The Grinch</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-dark: #0a0f0d;
-            --bg-card: #141f17;
-            --neon-green: #00ff66;
-            --neon-border: #00cc52;
-            --text-white: #FFFFFF;
-            --text-gray: #b4c4b1;
-            --accent-red: #ff3333;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-white); padding-bottom: 90px; }
-        
-        app-header {
-            background: linear-gradient(180deg, #122618 0%, #0a0f0d 100%);
-            padding: 15px; border-bottom: 2px solid var(--neon-green);
-            text-align: center; position: sticky; top: 0; z-index: 1000;
-        }
-        .app-header h1 { font-size: 1.5rem; font-weight: 900; letter-spacing: 1px; }
-        .grinch-text { color: var(--neon-green); text-shadow: 0 0 10px rgba(0, 255, 102, 0.6); }
-        .sub-header { font-size: 0.75rem; color: var(--text-gray); margin-top: 2px; }
-        
-        .app-main { padding: 12px; max-width: 600px; margin: 0 auto; }
-        
-        /* Banner Ofertas */
-        .banner-ofertas {
-            background: linear-gradient(135deg, #250d0d 14%, #141f17 100%);
-            border: 2px solid var(--accent-red); border-radius: 14px;
-            padding: 12px; margin-bottom: 15px; display: flex; align-items: center;
-            justify-content: space-between; text-decoration: none; color: var(--text-white);
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.25);
-        }
-        .banner-ofertas img { width: 90px; height: 75px; object-fit: cover; border-radius: 8px; border: 1px solid var(--accent-red); }
-        .banner-info h2 { font-size: 1rem; color: #ff6666; display: flex; align-items: center; gap: 5px; }
-        .banner-info p { font-size: 0.75rem; color: var(--text-gray); margin-top: 5px; }
+<!-- SECCIÓN: ALMACÉN Y HARINAS -->
+<div class="category-section" id="almacen">
+    <h2>Almacén, Harinas y Fideos</h2>
+    <div class="product-grid">
+        <!-- Harinas y Fécula -->
+        <div class="product-card"><h3>Harina Favorita 000</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Harina Favorita 0000</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Harina Pureza Pizzas Caseras c/ Levadura</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Harina Pureza Leudante / Ultra refinada</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Fécula de Mandioca Ranchito (Libre de Gluten) 1kg</h3><p class="price">Consultar</p></div>
 
-        /* Tarjetas Visuales de Secciones */
-        .grid-visual { display: flex; flex-direction: column; gap: 12px; margin-bottom: 15px; }
-        
-        .card-visual {
-            background-color: var(--bg-card); border: 2px solid var(--neon-border);
-            border-radius: 14px; overflow: hidden; display: flex; align-items: center;
-            text-decoration: none; color: var(--text-white); transition: transform 0.1s;
-            box-shadow: 0 4px 10px rgba(0, 255, 102, 0.1); cursor: pointer;
-        }
-        .card-visual:active { transform: scale(0.98); }
-        .card-img-container { width: 110px; height: 95px; flex-shrink: 0; background: #000; position: relative; }
-        .card-img-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
-        
-        .card-content { padding: 12px; flex-grow: 1; display: flex; justify-content: space-between; align-items: center; }
-        .card-text h3 { font-size: 1rem; color: var(--neon-green); margin-bottom: 4px; }
-        .card-text p { font-size: 0.75rem; color: var(--text-gray); line-height: 1.2; }
-        .card-arrow { font-size: 1.2rem; color: var(--neon-green); background: rgba(0,255,102,0.1); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        <!-- Sales -->
+        <div class="product-card"><h3>Sal Gruesa / Entrefina Celusal (0.5 kg)</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Sal Fina Doña Sal (0.5 kg)</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Sal Gruesa Celusal / Colosal (1 kg)</h3><p class="price">Consultar</p></div>
 
-        /* Secciones desplegables / Listados detallados */
-        .detalle-seccion {
-            background: var(--bg-card); border: 2px solid var(--neon-green);
-            border-radius: 14px; padding: 15px; margin-bottom: 15px; display: none;
-        }
-        .detalle-seccion.activo { display: block; }
-        .detalle-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid rgba(0,255,102,0.3); padding-bottom: 8px; }
-        .detalle-header h3 { font-size: 1.1rem; color: var(--neon-green); }
-        .btn-cerrar { background: var(--accent-red); color: white; border: none; padding: 5px 10px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; }
-        
-        .item-lista {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-            font-size: 0.85rem; gap: 10px;
-        }
-        .item-info { flex-grow: 1; }
-        .item-precio { color: var(--neon-green); font-weight: 600; font-size: 0.8rem; display: block; margin-top: 2px; }
-        
-        .controles-cant { display: flex; align-items: center; gap: 8px; }
-        .btn-cant { background: rgba(0,255,102,0.2); color: var(--neon-green); border: 1px solid var(--neon-green); width: 26px; height: 26px; border-radius: 50%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .btn-cant:active { background: var(--neon-green); color: black; }
-        .txt-cant { font-weight: bold; font-size: 0.9rem; min-width: 15px; text-align: center; }
+        <!-- Fideos -->
+        <div class="product-card"><h3>Fideos Luquetti (Tirabuzón / Coditos / Mostachol) 500g</h3><p class="price">$1.600[span_0](start_span)[span_0](end_span)</p></div>
+        <div class="product-card"><h3>Fideos Favorita Coditos 500g</h3><p class="price">$1.000[span_1](start_span)[span_1](end_span)</p></div>
+        <div class="product-card"><h3>Fideos La Providencia (Tirabuzón / Coditos / Mostachol / Pampero) 500g</h3><p class="price">$1.200[span_2](start_span)[span_2](end_span)</p></div>
 
-        /* Botón flotante del Carrito */
-        .carrito-flotante {
-            position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%);
-            background: linear-gradient(135deg, #00cc52 0%, #00993d 100%);
-            color: #0a0f0d; padding: 12px 24px; border-radius: 30px; font-weight: 900;
-            display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 20px rgba(0,255,102,0.5);
-            cursor: pointer; z-index: 2000; text-decoration: none; border: 2px solid #fff;
-            transition: transform 0.2s;
-        }
-        .carrito-flotante:active { transform: translateX(-50%) scale(0.95); }
-        .carrito-flotante i { font-size: 1.2rem; }
+        <!-- Arroz, Atún, Polenta y Choclo -->
+        <div class="product-card"><h3>Arroz Dos Hermanos (1 kg)</h3><p class="price">$1.600[span_3](start_span)[span_3](end_span)</p></div>
+        <div class="product-card"><h3>Arroz Cañuela Largo Fino (0.5 kg)</h3><p class="price">$800[span_4](start_span)[span_4](end_span)</p></div>
+        <div class="product-card"><h3>Atún Desmenuzado (Aceite / Agua) 170g</h3><p class="price">$2.000[span_5](start_span)[span_5](end_span)</p></div>
+        <div class="product-card"><h3>Polenta Presto Pronta Sabor Panceta y Queso (250g)</h3><p class="price">$1.800[span_6](start_span)[span_6](end_span)</p></div>
+        <div class="product-card"><h3>Polenta Presto Pronta Clásica (490g)</h3><p class="price">$2.000[span_7](start_span)[span_7](end_span)</p></div>
+        <div class="product-card"><h3>Choclo Cremoso Inca (350g)</h3><p class="price">$1.500[span_8](start_span)[span_8](end_span)</p></div>
+        <div class="product-card"><h3>Choclo Noel (300g)</h3><p class="price">$1.800[span_9](start_span)[span_9](end_span)</p></div>
 
-        /* Modal del Carrito */
-        #modal-carrito {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); z-index: 3000; display: none;
-            justify-content: center; align-items: flex-end;
-        }
-        .modal-contenido {
-            background: var(--bg-card); width: 100%; max-width: 600px;
-            max-height: 80vh; border-top: 3px solid var(--neon-green);
-            border-radius: 20px 20px 0 0; padding: 20px; overflow-y: auto;
-        }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
-        .modal-header h3 { color: var(--neon-green); font-size: 1.2rem; }
-        
-        .carrito-item-fila { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
-        .carrito-total { font-size: 1.1rem; font-weight: bold; color: var(--neon-green); text-align: right; margin: 15px 0; }
-        
-        .btn-enviar-pedido {
-            background: #25d366; color: white; border: none; width: 100%; padding: 12px;
-            border-radius: 12px; font-weight: bold; font-size: 1rem; display: flex;
-            align-items: center; justify-content: center; gap: 8px; cursor: pointer; text-decoration: none;
-        }
-
-        /* Botones inferiores principales */
-        .grid-botones-inferiores { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .btn-accion-grande {
-            background: linear-gradient(135deg, #122618 0%, #0d3b1e 100%);
-            border: 2px solid var(--neon-green); border-radius: 12px; padding: 12px;
-            text-decoration: none; color: var(--text-white); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center; gap: 5px;
-            box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
-        }
-        .btn-accion-grande i { font-size: 1.4rem; color: var(--neon-green); }
-        .btn-accion-grande span { font-size: 0.8rem; font-weight: bold; }
-        .btn-accion-grande small { font-size: 0.65rem; color: var(--text-gray); }
-
-        footer { text-align: center; font-size: 0.7rem; color: var(--text-gray); margin-top: 20px; }
-    </style>
-</head>
-<body>
-
-    <app-header>
-        <h1>KIOSCO <span class="grinch-text">THE GRINCH</span></h1>
-        <div class="sub-header"><i class="fas fa-map-marker-alt"></i> Av. Belgrano 963 | Tu kiosco de confianza</div>
-    </app-header>
-
-    <div class="app-main">
-        
-        <!-- Banner Ofertas -->
-        <a href="https://wa.me/5493624000000?text=Hola!%20Quiero%20consultar%20por%20las%20ofertas%20del%20día" class="banner-ofertas">
-            <div class="banner-info">
-                <h2><i class="fas fa-fire"></i> OFERTAS DEL DÍA</h2>
-                <p>¡No te las pierdas! Pizzas, picadas, promos y bebidas.</p>
-            </div>
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=300&q=80" alt="Ofertas">
-        </a>
-
-        <!-- Grilla Principal -->
-        <div class="grid-visual" id="menu-principal">
-            
-            <div class="card-visual" onclick="mostrarSeccion('seccion-bebidas')">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=300&q=80" alt="Bebidas">
-                </div>
-                <div class="card-content">
-                    <div class="card-text">
-                        <h3>BEBIDAS & GASEOSAS</h3>
-                        <p>Coca, Fanta, Sprite, Cervezas, Monster, Aguas</p>
-                    </div>
-                    <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
-                </div>
-            </div>
-
-            <div class="card-visual" onclick="mostrarSeccion('seccion-jugos')">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=300&q=80" alt="Jugos">
-                </div>
-                <div class="card-content">
-                    <div class="card-text">
-                        <h3>JUGOS & ADES</h3>
-                        <p>Aquarius, Cepita, Ades (Diferentes medidas)</p>
-                    </div>
-                    <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
-                </div>
-            </div>
-
-            <div class="card-visual" onclick="mostrarSeccion('seccion-comidas')">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=300&q=80" alt="Comidas">
-                </div>
-                <div class="card-content">
-                    <div class="card-text">
-                        <h3>COMIDAS</h3>
-                        <p>Pizzas • Empanadas • Tartas • Congelados</p>
-                    </div>
-                    <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
-                </div>
-            </div>
-
-            <div class="card-visual" onclick="mostrarSeccion('seccion-kiosco')">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?auto=format&fit=crop&w=300&q=80" alt="Kiosco">
-                </div>
-                <div class="card-content">
-                    <div class="card-text">
-                        <h3>KIOSCO & DULCES</h3>
-                        <p>Alfajores • Chocolates • Golosinas • Snacks</p>
-                    </div>
-                    <div class="card-arrow"><i class="fas fa-chevron-right"></i></div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- DETALLE DESPLEGABLE: BEBIDAS -->
-        <div id="seccion-bebidas" class="detalle-seccion">
-            <div class="detalle-header">
-                <h3><i class="fas fa-wine-bottle"></i> Lista de Precios Bebidas</h3>
-                <button class="btn-cerrar" onclick="cerrarSecciones()">Cerrar ✕</button>
-            </div>
-            
-            <div class="item-lista">
-                <div class="item-info"><span>Coca - Fanta - Sprite 1L (Retornable)</span><span class="item-precio">$2.800</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 1L (Ret)', 2800, -1)">-</button>
-                    <span class="txt-cant" id="cant-Coca - Fanta - Sprite 1L (Ret)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 1L (Ret)', 2800, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Coca 1.5L (Retornable)</span><span class="item-precio">$3.600</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca 1.5L (Retornable)', 3600, -1)">-</button>
-                    <span class="txt-cant" id="cant-Coca 1.5L (Retornable)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca 1.5L (Retornable)', 3600, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Coca - Fanta - Sprite 2L (Retornable)</span><span class="item-precio">$3.500</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 2L (Ret)', 3500, -1)">-</button>
-                    <span class="txt-cant" id="cant-Coca - Fanta - Sprite 2L (Ret)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 2L (Ret)', 3500, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Coca - Sprite 2.25L (Descartable)</span><span class="item-precio">$4.500</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Sprite 2.25L (Desc)', 4500, -1)">-</button>
-                    <span class="txt-cant" id="cant-Coca - Sprite 2.25L (Desc)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Sprite 2.25L (Desc)', 4500, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Coca - Fanta - Sprite 1.5L (Descartable)</span><span class="item-precio">$4.000</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 1.5L (Desc)', 4000, -1)">-</button>
-                    <span class="txt-cant" id="cant-Coca - Fanta - Sprite 1.5L (Desc)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 1.5L (Desc)', 4000, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Coca 600ml (Botella)</span><span class="item-precio">$1.900</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca 600ml (Botella)', 1900, -1)">-</button>
-                    <span class="txt-cant" id="cant-Coca 600ml (Botella)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca 600ml (Botella)', 1900, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Coca - Fanta - Sprite 375ml (Botella)</span><span class="item-precio">$1.800</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 375ml', 1800, -1)">-</button>
-                    <span class="txt-cant" id="cant-Coca - Fanta - Sprite 375ml">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca - Fanta - Sprite 375ml', 1800, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Coca 354ml (Lata)</span><span class="item-precio">$2.200</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca 354ml (Lata)', 2200, -1)">-</button>
-                    <span class="txt-cant" id="cant-Coca 354ml (Lata)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Coca 354ml (Lata)', 2200, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Monster</span><span class="item-precio">$3.000</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Monster', 3000, -1)">-</button>
-                    <span class="txt-cant" id="cant-Monster">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Monster', 3000, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Fanta 2.5L (Manzana / Oferta)</span><span class="item-precio">$2.500</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Fanta 2.5L Manzana (Oferta)', 2500, -1)">-</button>
-                    <span class="txt-cant" id="cant-Fanta 2.5L Manzana (Oferta)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Fanta 2.5L Manzana (Oferta)', 2500, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Fanta 2.5L (Retornable Oferta)</span><span class="item-precio">$1.500</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Fanta 2.5L Retornable (Oferta)', 1500, -1)">-</button>
-                    <span class="txt-cant" id="cant-Fanta 2.5L Retornable (Oferta)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Fanta 2.5L Retornable (Oferta)', 1500, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Crush 3L</span><span class="item-precio">$2.400</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Crush 3L', 2400, -1)">-</button>
-                    <span class="txt-cant" id="cant-Crush 3L">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Crush 3L', 2400, 1)">+</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- DETALLE DESPLEGABLE: JUGOS Y ADES -->
-        <div id="seccion-jugos" class="detalle-seccion">
-            <div class="detalle-header">
-                <h3><i class="fas fa-glass-whiskey"></i> Jugos, Aguas & Ades</h3>
-                <button class="btn-cerrar" onclick="cerrarSecciones()">Cerrar ✕</button>
-            </div>
-            
-            <div class="item-lista">
-                <div class="item-info"><span>Aquarius 2.25L</span><span class="item-precio">$2.700</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Aquarius 2.25L', 2700, -1)">-</button>
-                    <span class="txt-cant" id="cant-Aquarius 2.25L">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Aquarius 2.25L', 2700, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Aquarius 500ml</span><span class="item-precio">$1.500</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Aquarius 500ml', 1500, -1)">-</button>
-                    <span class="txt-cant" id="cant-Aquarius 500ml">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Aquarius 500ml', 1500, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Cepita 3L</span><span class="item-precio">$3.000</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 3L', 3000, -1)">-</button>
-                    <span class="txt-cant" id="cant-Cepita 3L">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 3L', 3000, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Cepita 1.5L</span><span class="item-precio">$3.800</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1.5L', 3800, -1)">-</button>
-                    <span class="txt-cant" id="cant-Cepita 1.5L">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1.5L', 3800, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Cepita 1L (Botella)</span><span class="item-precio">$2.900</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1L (Botella)', 2900, -1)">-</button>
-                    <span class="txt-cant" id="cant-Cepita 1L (Botella)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1L (Botella)', 2900, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Cepita 1L (Caja)</span><span class="item-precio">$2.500</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1L (Caja)', 2500, -1)">-</button>
-                    <span class="txt-cant" id="cant-Cepita 1L (Caja)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 1L (Caja)', 2500, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Cepita 200ml</span><span class="item-precio">$1.000</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 200ml', 1000, -1)">-</button>
-                    <span class="txt-cant" id="cant-Cepita 200ml">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Cepita 200ml', 1000, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Ades 1L (Caja)</span><span class="item-precio">$3.200</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Ades 1L (Caja)', 3200, -1)">-</button>
-                    <span class="txt-cant" id="cant-Ades 1L (Caja)">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Ades 1L (Caja)', 3200, 1)">+</button>
-                </div>
-            </div>
-
-            <div class="item-lista">
-                <div class="item-info"><span>Ades 200ml</span><span class="item-precio">$1.100</span></div>
-                <div class="controles-cant">
-                    <button class="btn-cant" onclick="cambiarCantidad('Ades 200ml', 1100, -1)">-</button>
-                    <span class="txt-cant" id="cant-Ades 200ml">0</span>
-                    <button class="btn-cant" onclick="cambiarCantidad('Ades 200ml', 1100, 1)">+</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- DETALLE DESPLEGABLE: COMIDAS -->
-        <div id="seccion-comidas" class="detalle-seccion">
-            <div class="detalle-header">
-                <h3><i class="fas fa-pizza-slice"></i> Comidas & Congelados</h3>
-                <button class="btn-cerrar" onclick="cerrarSecciones()">Cerrar ✕</button>
-            </div>
-            <div class="item-lista"><span>Pizzas listas para hornear</span><span>Consultar</span></div>
-            <div class="item-lista"><span>Empanadas congeladas (x docena)</span><span>Variadas</span></div>
-            <div class="item-lista"><span>Patys y Medallones</span><span>Congelados</span></div>
-        </div>
-
-        <!-- DETALLE DESPLEGABLE: KIOSCO -->
-        <div id="seccion-kiosco" class="detalle-seccion">
-            <div class="detalle-header">
-                <h3><i class="fas fa-cookie-bite"></i> Kiosco & Golosinas</h3>
-                <button class="btn-cerrar" onclick="cerrarSecciones()">Cerrar ✕</button>
-            </div>
-            <div class="item-lista"><span>Alfajores Las Colonias (Triple Blanco/Negro)</span><span>Variedad</span></div>
-            <div class="item-lista"><span>Alfajores Terrabusi de Torta</span><span>Dulce de leche</span></div>
-            <div class="item-lista"><span>Chocolates y Golosinas</span><span>Variados</span></div>
-            <div class="item-lista"><span>Snacks y Papas Fritas</span><span>Chico / Grande</span></div>
-        </div>
-
-        <!-- Botones inferiores principales -->
-        <div class="grid-botones-inferiores">
-            <a href="https://wa.me/5493624000000?text=Hola!%20Quiero%20hacer%20un%20pedido%20desde%20la%20web" class="btn-accion-grande">
-                <i class="fab fa-whatsapp"></i>
-                <span>HACER PEDIDO</span>
-                <small>Escribinos por WhatsApp</small>
-            </a>
-            <a href="https://wa.me/5493624000000?text=Hola!%20Te%20mando%20el%20comprobante%20de%20pago" class="btn-accion-grande">
-                <i class="fas fa-wallet"></i>
-                <span>PAGOS Y ENVÍOS</span>
-                <small>Alias: Grinch.963</small>
-            </a>
-        </div>
-
-        <footer>
-            Kiosco The Grinch &copy; 2026 - Av. Belgrano 963
-        </footer>
-
+        <!-- Purés, Conservas y Vinagres -->
+        <div class="product-card"><h3>Puré de Tomates Baggio "De la Huerta" (530g)</h3><p class="price">$1.200[span_10](start_span)[span_10](end_span)</p></div>
+        <div class="product-card"><h3>Puré de Tomates Santa Isabel (520g)</h3><p class="price">$1.000[span_11](start_span)[span_11](end_span)</p></div>
+        <div class="product-card"><h3>Puré de Tomates Big C (210g)</h3><p class="price">$500[span_12](start_span)[span_12](end_span)</p></div>
+        <div class="product-card"><h3>Doña Pupa Remolacha en Cubos (340g)</h3><p class="price">$2.600[span_13](start_span)[span_13](end_span)</p></div>
+        <div class="product-card"><h3>Doña Pupa Jardinera de Hortalizas y Legumbres (340g)</h3><p class="price">$700[span_14](start_span)[span_14](end_span)</p></div>
+        <div class="product-card"><h3>Doña Pupa Zanahoria en Cubos (340g)</h3><p class="price">$1.100[span_15](start_span)[span_15](end_span)</p></div>
+        <div class="product-card"><h3>Doña Pupa Lentejas (340g)</h3><p class="price">$1.600[span_16](start_span)[span_16](end_span)</p></div>
+        <div class="product-card"><h3>Olivas Verdes Castell (200g / 100g esc.)</h3><p class="price">$1.400[span_17](start_span)[span_17](end_span)[span_18](start_span)[span_18](end_span)</p></div>
+        <div class="product-card"><h3>Vinagre de Alcohol San Iginio (1 Litro)</h3><p class="price">$1.700[span_19](start_span)[span_19](end_span)</p></div>
+        <div class="product-card"><h3>Vinagre de Alcohol Halconero (930 ml)</h3><p class="price">$1.500[span_20](start_span)[span_20](end_span)</p></div>
+        <div class="product-card"><h3>Flow Cereal Almohaditas Rellenas Frutilla (180g)</h3><p class="price">$2.000[span_21](start_span)[span_21](end_span)</p></div>
+        <div class="product-card"><h3>Bizcochos 9 de Oro (200g)</h3><p class="price">$1.600[span_22](start_span)[span_22](end_span)[span_23](start_span)[span_23](end_span)[span_24](start_span)[span_24](end_span)[span_25](start_span)[span_25](end_span)</p></div>
     </div>
+</div>
 
-    <!-- Botón Flotante Carrito -->
-    <div class="carrito-flotante" onclick="abrirCarrito()">
-        <i class="fas fa-shopping-cart"></i>
-        <span id="contador-carrito">Ver Carrito (0)</span>
+<!-- SECCIÓN: CONGELADOS -->
+<div class="category-section" id="congelados">
+    <h2>Congelados y Panificados de Freezer</h2>
+    <div class="product-grid">
+        <div class="product-card"><h3>Medallones Clásicos de Pollo</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Medallones de Pollo con Jamón y Queso</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Patitas de Pollo Tradicionales</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Patitas Crunch de Pollo</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Milanesas de Pollo Congeladas</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Chipá (Paquete de 1/2 kg)</h3><p class="price">Consultar</p></div>
+        <div class="product-card"><h3>Medialunas Saladas (Pack x 2 unidades)</h3><p class="price">Consultar</p></div>
     </div>
+</div>
 
-    <!-- Modal del Carrito -->
-    <div id="modal-carrito" onclick="cerrarCarritoFuera(event)">
-        <div class="modal-contenido">
-            <div class="modal-header">
-                <h3><i class="fas fa-shopping-bag"></i> Tu Pedido en El Grinch</h3>
-                <button class="btn-cerrar" onclick="cerrarCarrito()">Cerrar ✕</button>
-            </div>
-            <div id="lista-carrito-items">
-                <p style="text-align: center; color: var(--text-gray); padding: 20px;">Tu carrito está vacío.</p>
-            </div>
-            <div class="carrito-total" id="carrito-total-txt">Total: $0</div>
-            <button class="btn-enviar-pedido" onclick="enviarPedidoWhatsApp()">
-                <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
-            </button>
-        </div>
+<!-- SECCIÓN: PANIFICADOS -->
+<div class="category-section" id="panificados">
+    <h2>Panificados y Lactales</h2>
+    <div class="product-grid">
+        <div class="product-card"><h3>Pan Viena / Pan para Panchos Plus Ultra (6 u. - 250g)</h3><p class="price">$1.500[span_26](start_span)[span_26](end_span)[span_27](start_span)[span_27](end_span)</p></div>
+        <div class="product-card"><h3>Pan para Hamburguesas Plus Ultra (4 u. - 200g)</h3><p class="price">$1.500[span_28](start_span)[span_28](end_span)[span_29](start_span)[span_29](end_span)</p></div>
+        <div class="product-card"><h3>Pan Lactal Plus Ultra (Blanco o Salvado - 400g)</h3><p class="price">$2.400[span_30](start_span)[span_30](end_span)[span_31](start_span)[span_31](end_span)</p></div>
+        <div class="product-card"><h3>Prepizza (x 1 unidad)</h3><p class="price">$1.400[span_32](start_span)[span_32](end_span)</p></div>
+        <div class="product-card"><h3>Prepizza (x 2 unidades)</h3><p class="price">$2.200[span_33](start_span)[span_33](end_span)</p></div>
     </div>
-
-    <script>
-        let carrito = {};
-
-        function mostrarSeccion(idSeccion) {
-            document.querySelectorAll('.detalle-seccion').forEach(sec => sec.classList.remove('activo'));
-            document.getElementById(idSeccion).classList.add('activo');
-            document.getElementById(idSeccion).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-        function cerrarSecciones() {
-            document.querySelectorAll('.detalle-seccion').forEach(sec => sec.classList.remove('activo'));
-        }
-
-        function cambiarCantidad(nombre, precio, cambio) {
-            if (!carrito[nombre]) {
-                carrito[nombre] = { precio: precio, cantidad: 0 };
-            }
-            carrito[nombre].cantidad += cambio;
-            if (carrito[nombre].cantidad <= 0) {
-                delete carrito[nombre];
-                carrito[nombre] = { precio: precio, cantidad: 0 };
-            }
-            
-            // Actualiza visualmente en la pantalla
-            const el = document.getElementById('cant-' + nombre);
-            if (el) el.innerText = carrito[nombre].cantidad;
-
-            actualizarContadorFlotante();
-        }
-
-        function actualizarContadorFlotante() {
-            let totalItems = 0;
-            for (let item in carrito) {
-                totalItems += carrito[item].cantidad;
-            }
-            document.getElementById('contador-carrito').innerText = `Ver Carrito (${totalItems})`;
-        }
-
-        function abrirCarrito() {
-            let contenedor = document.getElementById('lista-carrito-items');
-            contenedor.innerHTML = '';
-            let totalGeneral = 0;
-            let hayItems = false;
-
-            for (let item in carrito) {
-                if (carrito[item].cantidad > 0) {
-                    hayItems = true;
-                    let subtotal = carrito[item].precio * carrito[item].cantidad;
-                    totalGeneral += subtotal;
-
-                    contenedor.innerHTML += `
-                        <div class="carrito-item-fila">
-                            <div>
-                                <strong>${item}</strong><br>
-                                <small style="color:var(--text-gray);">${carrito[item].cantidad} x $${carrito[item].precio.toLocaleString()}</small>
-                            </div>
-                            <div style="color:var(--neon-green); font-weight:bold;">
-                                $${subtotal.toLocaleString()}
-                            </div>
-                        </div>
-                    `;
-                }
-            }
-
-            if (!hayItems) {
-                contenedor.innerHTML = '<p style="text-align: center; color: var(--text-gray); padding: 20px;">Tu carrito está vacío.</p>';
-            }
-
-            document.getElementById('carrito-total-txt').innerText = `Total: $${totalGeneral.toLocaleString()}`;
-            document.getElementById('modal-carrito').style.display = 'flex';
-        }
-
-        function cerrarCarrito() {
-            document.getElementById('modal-carrito').style.display = 'none';
-        }
-
-        function cerrarCarritoFuera(event) {
-            if (event.target.id === 'modal-carrito') {
-                cerrarCarrito();
-            }
-        }
-
-        function enviarPedidoWhatsApp() {
-            let mensaje = "Hola! Kiosco The Grinch, quiero hacer el siguiente pedido:\n\n";
-            let totalGeneral = 0;
-            let hayItems = false;
-
-            for (let item in carrito) {
-                if (carrito[item].cantidad > 0) {
-                    hayItems = true;
-                    let subtotal = carrito[item].precio * carrito[item].cantidad;
-                    totalGeneral += subtotal;
-                    mensaje += `• ${carrito[item].cantidad}x ${item} ($${subtotal.toLocaleString()})\n`;
-                }
-            }
-
-            if (!hayItems) {
-                alert("Primero agrega algunos productos al carrito.");
-                return;
-            }
-
-            mensaje += `\n*TOTAL A PAGAR: $${totalGeneral.toLocaleString()}*`;
-            mensaje += `\n\nDirección de entrega / Retiro en Av. Belgrano 963`;
-
-            let url = `https://wa.me/5493624059555?text=` + encodeURIComponent(mensaje);
-            window.open(url, '_blank');
-        }
-    </script>
-</body>
-</html>
+</div>
