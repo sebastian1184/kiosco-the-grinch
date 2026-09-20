@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiosco The Grinch - Catálogo y Pedidos</title>
+    <title>Kiosco The Grinch - Catálogo General y Pedidos</title>
     <style>
         :root {
             --bg-color: #0c0f0a;
@@ -12,7 +12,6 @@
             --accent-dark-green: #008f39;
             --text-main: #ffffff;
             --text-muted: #b0c4de;
-            --danger: #ff4d4d;
         }
         * {
             box-sizing: border-box;
@@ -145,12 +144,10 @@
 
     <header>
         <h1>KIOSCO THE GRINCH</h1>
-        <p>📍 Av. Belgrano 963 | Catálogo Interactivo en Vivo</p>
+        <p>📍 Av. Belgrano 963 | Catálogo General Completo</p>
     </header>
 
-    <div id="catalog-container" style="padding-bottom: 80px;">
-        <!-- Se genera dinámicamente -->
-    </div>
+    <div id="catalog-container" style="padding-bottom: 80px;"></div>
 
     <div class="cart-bar">
         <div>
@@ -163,76 +160,91 @@
     <script>
         const catalog = [
             {
-                category: "🥤 Gaseosas y Línea Coca-Cola",
+                category: "🥤 Gaseosas (Línea Coca-Cola, Sprite, Fanta)",
                 items: [
-                    {id: 1, name: "Lata Clásica / Chiquitita", desc: "269/310 ml", price: 1300},
-                    {id: 2, name: "Lata Regular (Coca/Sprite/Fanta)", desc: "354 ml", price: 1400},
+                    {id: 1, name: "Lata Chiquitita / Clásica", desc: "269/310 ml", price: 1300},
+                    {id: 2, name: "Lata Regular (354 ml)", desc: "Lata aluminio", price: 1400},
                     {id: 3, name: "Botellita PET Chiquitita", desc: "250/300 ml", price: 1000},
                     {id: 4, name: "Botella PET 500 ml", desc: "Mediana", price: 1800},
                     {id: 5, name: "Botella PET 600 ml", desc: "Popular", price: 2000},
-                    {id: 6, name: "Botella PET 1.5 Litros", desc: "Litro y Medio", price: 2800},
-                    {id: 7, name: "Botella PET 2.25 Litros", desc: "Familiar grande", price: 3500},
-                    {id: 8, name: "Pepsi / 7Up", desc: "1.5L / 2.25L", price: 2600},
-                    {id: 9, name: "Pepsi / 7Up Lata", desc: "354 ml", price: 1300}
+                    {id: 6, name: "Botella PET 1.5 Litros", desc: "Litro y medio", price: 2800},
+                    {id: 7, name: "Botella PET 2.25 Litros", desc: "Familiar", price: 3500},
+                    {id: 8, name: "Vidrio Retornable 1 Litro", desc: "Clásica helada", price: 2800},
+                    {id: 9, name: "Vidrio Retornable 2 Litros / 2.25L", desc: "Familiar retornable", price: 3600}
+                ]
+            },
+            {
+                category: "🥤 Gaseosas (Línea Pepsi y 7Up)",
+                items: [
+                    {id: 10, name: "Pepsi / 7Up Descartable", desc: "1.5L / 2.25L", price: 2600},
+                    {id: 11, name: "Pepsi / 7Up Lata", desc: "354 ml", price: 1300}
                 ]
             },
             {
                 category: "🍺 Cervezas, Energizantes y Aperitivos",
                 items: [
-                    {id: 10, name: "Cerveza en Lata (Heineken/Quilmes/Brahma)", desc: "473 ml", price: 2000},
-                    {id: 11, name: "Bebida Energizante Speed Unlimited", desc: "Lata 473 ml", price: 2200},
-                    {id: 12, name: "Licor Fino de Café al Coñac New Style", desc: "200 cm³", price: 2000}
+                    {id: 12, name: "Cerveza en Lata (Heineken/Quilmes/Brahma)", desc: "473 ml", price: 2000},
+                    {id: 13, name: "Bebida Energizante Speed Unlimited", desc: "Lata 473 ml", price: 2200},
+                    {id: 14, name: "Licor Fino de Café al Coñac New Style", desc: "200 cm³", price: 2000}
                 ]
             },
             {
-                category: "🧃 Aguas, Terma y Jugos",
+                category: "🧃 Aguas, Sodas, Terma y Jugos",
                 items: [
-                    {id: 13, name: "Agua Mineral Sin Gas", desc: "500 ml / 1.5 L", price: 1200},
-                    {id: 14, name: "Soda / Agua Gasificada", desc: "Sifón / Descartable", price: 1500},
-                    {id: 15, name: "Terma (Herbal / Citrus)", desc: "710 ml", price: 2400},
-                    {id: 16, name: "Jugo Baggio", desc: "Tetra Litro", price: 1600},
-                    {id: 17, name: "Jugo Ades", desc: "Tetra Litro", price: 1800},
-                    {id: 18, name: "Jugo Aquarius", desc: "500 ml / 1.5 L", price: 1700},
-                    {id: 19, name: "Jugo Cepita", desc: "Tetra Litro", price: 1800}
+                    {id: 15, name: "Agua Mineral Sin Gas", desc: "500 ml / 1.5 L", price: 1200},
+                    {id: 16, name: "Soda / Agua Gasificada", desc: "Sifón / Descartable", price: 1500},
+                    {id: 17, name: "Terma (Herbal / Citrus)", desc: "710 ml", price: 2400},
+                    {id: 18, name: "Jugo Baggio", desc: "Tetra Litro", price: 1600},
+                    {id: 19, name: "Jugo Ades", desc: "Tetra Litro", price: 1800},
+                    {id: 20, name: "Jugo Aquarius", desc: "500 ml / 1.5 L", price: 1700},
+                    {id: 21, name: "Jugo Cepita", desc: "Tetra Litro", price: 1800}
                 ]
             },
             {
                 category: "🥩 Fiambres al Corte y Combos",
                 items: [
-                    {id: 20, name: "Jamón Cocido Cortado a Máquina", desc: "100g / 200g", price: 1800},
-                    {id: 21, name: "Paleta Cortada a Máquina", desc: "100g / 200g", price: 1400},
-                    {id: 22, name: "Queso de Máquina / Tybo Cortado", desc: "100g / 200g", price: 1800},
-                    {id: 23, name: "Salame Milán Cortado a Máquina", desc: "100g / 200g", price: 2200},
-                    {id: 24, name: "Combo Paleta y Queso", desc: "200g + 200g", price: 3000},
-                    {id: 25, name: "Combo Queso y Salame Milán", desc: "200g + 200g", price: 3800},
-                    {id: 26, name: "Queso Cremoso Fraccionado", desc: "Por kg / Porción", price: 6500}
+                    {id: 22, name: "Jamón Cocido Cortado a Máquina", desc: "100g / 200g", price: 1800},
+                    {id: 23, name: "Paleta Cortada a Máquina", desc: "100g / 200g", price: 1400},
+                    {id: 24, name: "Queso de Máquina / Tybo Cortado", desc: "100g / 200g", price: 1800},
+                    {id: 25, name: "Salame Milán Cortado a Máquina", desc: "100g / 200g", price: 2200},
+                    {id: 26, name: "Combo Paleta y Queso", desc: "200g + 200g", price: 3000},
+                    {id: 27, name: "Combo Queso y Salame Milán", desc: "200g + 200g", price: 3800},
+                    {id: 28, name: "Queso Cremoso Fraccionado", desc: "Por kg / Porción", price: 6500}
                 ]
             },
             {
                 category: "🥚 Almacén, Frescos y Conservas",
                 items: [
-                    {id: 27, name: "Huevos B1 (Media Docena)", desc: "6 unidades", price: 3000},
-                    {id: 28, name: "Huevos B1 (Docena)", desc: "12 unidades", price: 6000},
-                    {id: 29, name: "Huevos B1 (Maple Completo)", desc: "30 unidades", price: 6000},
-                    {id: 30, name: "Polenta Instantánea Presto Pronta", desc: "490 g", price: 2000},
-                    {id: 31, name: "Polenta Saborizada Panceta y Queso", desc: "250 g", price: 1800},
-                    {id: 32, name: "Remolacha / Jardinera Doña Pupa", desc: "340 g", price: 700},
-                    {id: 33, name: "Zanahoria / Lentejas Doña Pupa", desc: "340 g", price: 1200},
-                    {id: 34, name: "Puré de Tomates Santa Isabel", desc: "520 g", price: 1200},
-                    {id: 35, name: "Sopa Knorr Quick (Sobres)", desc: "Caja x5 / Unit", price: 3400}
+                    {id: 29, name: "Huevos B1 (Media Docena)", desc: "6 unidades", price: 3000},
+                    {id: 30, name: "Huevos B1 (Docena)", desc: "12 unidades", price: 6000},
+                    {id: 31, name: "Huevos B1 (Maple Completo)", desc: "30 unidades", price: 6000},
+                    {id: 32, name: "Polenta Instantánea Presto Pronta", desc: "490 g", price: 2000},
+                    {id: 33, name: "Polenta Saborizada Panceta y Queso", desc: "250 g", price: 1800},
+                    {id: 34, name: "Remolacha / Jardinera Doña Pupa", desc: "340 g", price: 700},
+                    {id: 35, name: "Zanahoria / Lentejas Doña Pupa", desc: "340 g", price: 1200},
+                    {id: 36, name: "Choclo Cremoso Inca / Arvejas", desc: "350 g", price: 1500},
+                    {id: 37, name: "Olivas Verdes Castell", desc: "200 g", price: 1400},
+                    {id: 38, name: "Puré de Tomates Santa Isabel / Baggio", desc: "520/530 g", price: 1200},
+                    {id: 39, name: "Puré de Tomates Big Choice", desc: "210 g", price: 700},
+                    {id: 40, name: "Sopa Knorr Quick (Sobres)", desc: "Caja x5 / Unit", price: 3400},
+                    {id: 41, name: "Queso Rallado La Paulina / Tremblay", desc: "Sobre 40 g", price: 1500},
+                    {id: 42, name: "Vinagre de Alcohol Halconero / San Iginio", desc: "930ml / 1L", price: 1600}
                 ]
             },
             {
-                category: "🍫 Golosinas, Librería y Varios",
+                category: "🍫 Golosinas, Librería y Cuidado Personal",
                 items: [
-                    {id: 36, name: "Bon O Bon (Clásico / Blanco)", desc: "Unidad", price: 300},
-                    {id: 37, name: "Caramelos Misky (Sueltos)", desc: "Unidad", price: 150},
-                    {id: 38, name: "Chupetín Billiken", desc: "Unidad", price: 400},
-                    {id: 39, name: "Alfajor Terrabusi Torta x3", desc: "70 g", price: 1800},
-                    {id: 40, name: "Pilas Energizer CR2032", desc: "Blister 3V", price: 2100},
-                    {id: 41, name: "Adhesivo La Gotita", desc: "Pomo 2 ml", price: 1500},
-                    {id: 42, name: "Naipes El Padrino", desc: "Mazo 40 cartas", price: 2500},
-                    {id: 43, name: "Preservativos Playboy", desc: "Caja individual", price: 1700}
+                    {id: 43, name: "Bon O Bon (Clásico / Blanco)", desc: "Unidad", price: 300},
+                    {id: 44, name: "Caramelos Misky (Sueltos)", desc: "Unidad", price: 150},
+                    {id: 45, name: "Chupetín Billiken", desc: "Unidad", price: 400},
+                    {id: 46, name: "Alfajor Terrabusi Torta x3", desc: "70 g", price: 1800},
+                    {id: 47, name: "Pilas Energizer CR2032", desc: "Blister 3V", price: 2100},
+                    {id: 48, name: "Adhesivo La Gotita", desc: "Pomo 2 ml", price: 1500},
+                    {id: 49, name: "Naipes El Padrino", desc: "Mazo 40 cartas", price: 2500},
+                    {id: 50, name: "Pañuelos Elite (x10) / Fósforos Buenos Días", desc: "Pack / Caja", price: 1300},
+                    {id: 51, name: "Encendedores Candela", desc: "Unidad", price: 500},
+                    {id: 52, name: "Preservativos Playboy", desc: "Caja individual", price: 1700},
+                    {id: 53, name: "Productos de Limpieza Varios", desc: "Litro", price: 1500}
                 ]
             }
         ];
