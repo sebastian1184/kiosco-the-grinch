@@ -3,273 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiosco The Grinch</title>
+    <title>Kiosco The Grinch - Catálogo General y Pedidos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #0af00a;
-            --bg-card: #141f17;
-            --neon-green: #00ff60;
-            --neon-border: #00cc52;
-            --text-white: #ffffff;
-            --text-gray: #b4c4b4;
-            --accent-red: #ff3333;
+            --bg-color: #0cf00a;
+            --card-bg: #141c14;
+            --accent-green: #00ff66;
+            --accent-dark-green: #008f39;
+            --text-main: #ffffff;
+            --text-muted: #b4c4de;
+            --danger: #ff4d4d;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            padding-bottom: 80px;
-        }
-
-        .app-header {
-            background: linear-gradient(180deg, #122018 0%, #0af00a 100%);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             padding: 15px;
-            border-bottom: 2px solid var(--neon-green);
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .app-header h1 {
-            font-size: 1.5rem;
-            font-weight: 900;
-            letter-spacing: 1px;
-            color: var(--neon-green);
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
-        }
-
-        .sub-header {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            margin-top: 2px;
-        }
-
-        .app-main {
-            padding: 12px;
-            max-width: 600px;
+            max-width: 480px;
             margin: 0 auto;
+            padding-bottom: 90px;
         }
 
-        /* Menú de Navegación Rápida */
-        .nav-menu {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent-green);
             padding-bottom: 10px;
-            margin-bottom: 15px;
         }
 
-        .nav-btn {
-            background: var(--bg-card);
-            color: var(--neon-green);
-            border: 1px solid var(--neon-border);
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            white-space: nowrap;
-            text-decoration: none;
+        header h1 {
+            color: var(--accent-green);
+            font-size: 24px;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        }
+
+        header p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Botonera Principal */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .cat-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-dark-green);
+            color: var(--text-main);
+            padding: 14px 10px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: bold;
-        }
-
-        /* Banner Ofertas */
-        .banner-ofertas {
-            background: linear-gradient(135deg, #250d0d 14%, #141f17 100%);
-            border: 2px solid var(--accent-red);
-            border-radius: 14px;
-            padding: 12px;
-            margin-bottom: 15px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+            text-decoration: none;
             display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .cat-btn:hover {
+            background: var(--accent-dark-green);
+        }
+
+        .section-title {
+            font-size: 15px;
+            color: var(--accent-green);
+            margin: 12px 0 8px 0;
+            font-weight: bold;
+            display: flex;
             justify-content: space-between;
-            text-decoration: none;
-            color: var(--text-white);
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.25);
-        }
-
-        .category-section {
-            margin-bottom: 25px;
-            background: rgba(20, 31, 23, 0.6);
+            align-items: center;
+            cursor: pointer;
+            background: var(--card-bg);
             padding: 12px;
-            border-radius: 10px;
-            border: 1px solid var(--neon-border);
+            border-radius: 8px;
+            border: 1px solid var(--accent-dark-green);
         }
 
-        .category-section h2 {
-            font-size: 1.1rem;
-            color: var(--neon-green);
+        .submenu {
+            display: none;
+            padding-left: 5px;
             margin-bottom: 10px;
-            border-bottom: 1px solid var(--neon-border);
-            padding-bottom: 5px;
         }
 
-        .product-grid {
-            display: grid;
-            gap: 10px;
+        .submenu.active {
+            display: block;
         }
 
         .product-card {
-            background: var(--bg-card);
-            border: 1px solid var(--neon-border);
-            border-radius: 8px;
-            padding: 10px;
+            background: #1a261a;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-left: 4px solid var(--accent-green);
         }
 
-        .product-card h3 {
-            font-size: 0.9rem;
-            font-weight: 500;
+        .product-info h3 {
+            font-size: 13px;
+            margin-bottom: 2px;
         }
 
-        .product-card .price {
-            font-size: 0.9rem;
-            color: var(--neon-green);
+        .product-info .price {
+            font-size: 13px;
+            color: var(--accent-green);
             font-weight: bold;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-btn {
+            background: var(--accent-green);
+            color: #000;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .qty-display {
+            font-size: 14px;
+            font-weight: bold;
+            min-width: 15px;
+            text-align: center;
+        }
+
+        /* Botón Flotante del Carrito */
+        .cart-bar {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 440px;
+            background: #112611;
+            border: 2px solid var(--accent-green);
+            padding: 12px 20px;
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .cart-bar span {
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+
+        /* Modal del Carrito */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .cart-content {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-green);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--accent-dark-green);
+            padding-bottom: 8px;
+        }
+
+        .close-cart {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .whatsapp-btn {
+            display: block;
+            width: 100%;
+            background: #25d366;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <header class="app-header">
+    <header>
         <h1>KIOSCO THE GRINCH</h1>
-        <div class="sub-header">Catálogo Oficial</div>
+        <p>Tu kiosco de confianza</p>
     </header>
 
-    <main class="app-main">
+    <!-- Menú de Categorías -->
+    <div class="categories-grid">
+        <a href="#comidas" class="cat-btn"><i class="fa-solid fa-pizza-slice"></i> Comidas</a>
+        <a href="#bebidas" class="cat-btn"><i class="fa-solid fa-bottle-droplet"></i> Bebidas</a>
+        <a href="#almacen" class="cat-btn"><i class="fa-solid fa-basket-shopping"></i> Almacén</a>
+        <a href="#panificados" class="cat-btn"><i class="fa-solid fa-bread-slice"></i> Panificados</a>
+    </div>
 
-        <!-- Menú de Acceso Rápido -->
-        <div class="nav-menu">
-            <a href="#ofertas" class="nav-btn">🔥 Ofertas</a>
-            <a href="#comidas" class="nav-btn">🍔 Comidas</a>
-            <a href="#almacen" class="nav-btn">🛒 Almacén</a>
-            <a href="#panificados" class="nav-btn">🥖 Panificados</a>
+    <!-- SECCIÓN COMIDAS -->
+    <div class="section-title" onclick="toggleSubmenu('sub-comidas')">
+        <span>🍔 Comidas y Congelados</span>
+        <i class="fa-solid fa-chevron-down"></i>
+    </div>
+    <div id="sub-comidas" class="submenu active">
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Pizzas / Prepizzas</h3>
+                <div class="price">$2.200</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Pizzas', -1)">-</button>
+                <span class="qty-display" id="qty-Pizzas">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Pizzas', 1)">+</button>
+            </div>
         </div>
-
-        <!-- Banner Ofertas -->
-        <div id="ofertas"></div>
-        <a href="#" class="banner-ofertas">
-            <div>
-                <h3>¡Ofertas Especiales!</h3>
-                <p style="font-size: 0.8rem; color: var(--text-gray);">Mirá los descuentos de la semana</p>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Empanadas (Unidad)</h3>
+                <div class="price">$600</div>
             </div>
-            <i class="fa-solid fa-chevron-right" style="color: var(--accent-red);"></i>
-        </a>
-
-        <!-- SECCIÓN: COMIDAS Y CONGELADOS -->
-        <section class="category-section" id="comidas">
-            <h2>🍽️ Comidas y Congelados</h2>
-            <div class="product-grid">
-                
-                <!-- Pizzas -->
-                <div class="product-card">
-                    <h3>🍕 Pizzas (Preizzas / Variedades)</h3>
-                    <p class="price">Consultar</p>
-                </div>
-
-                <!-- Empanadas -->
-                <div class="product-card">
-                    <h3>🥟 Empanadas</h3>
-                    <p class="price">Consultar</p>
-                </div>
-
-                <!-- Tartas -->
-                <div class="product-card">
-                    <h3>🥧 Tartas</h3>
-                    <p class="price">Consultar</p>
-                </div>
-
-                <!-- Productos Congelados -->
-                <div class="product-card">
-                    <h3>❄️ Medallones de pollo</h3>
-                    <p class="price">Consultar</p>
-                </div>
-                <div class="product-card">
-                    <h3>❄️ Medallones de jamón y queso</h3>
-                    <p class="price">Consultar</p>
-                </div>
-                <div class="product-card">
-                    <h3>❄️ Patitas de pollo</h3>
-                    <p class="price">Consultar</p>
-                </div>
-                <div class="product-card">
-                    <h3>❄️ Milanesa de pollo</h3>
-                    <p class="price">Consultar</p>
-                </div>
-                <div class="product-card">
-                    <h3>❄️ Chipá congelados</h3>
-                    <p class="price">Consultar</p>
-                </div>
-                <div class="product-card">
-                    <h3>❄️ Medialunas congeladas</h3>
-                    <p class="price">Consultar</p>
-                </div>
-
-                <!-- Espacio preparado para Helados y hielo -->
-                <div class="product-card" style="border-style: dashed; opacity: 0.8;">
-                    <h3 style="color: var(--text-gray);">🧊 Helados y Hielo (Próximamente)</h3>
-                    <p class="price" style="color: var(--text-gray);">-</p>
-                </div>
-
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Empanadas', -1)">-</button>
+                <span class="qty-display" id="qty-Empanadas">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Empanadas', 1)">+</button>
             </div>
-        </section>
-
-        <!-- Sección: Almacén y Harinas -->
-        <section class="category-section" id="almacen">
-            <h2>🛒 Almacén, Harinas y Fideos</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>Harina Favorita 000</h3>
-                    <p class="price">Consultar</p>
-                </div>
-                <div class="product-card">
-                    <h3>Sal Fina Celusal (0.5 kg)</h3>
-                    <p class="price">Consultar</p>
-                </div>
-                <div class="product-card">
-                    <h3>Fideos Lucchetti (500g)</h3>
-                    <p class="price">Consultar</p>
-                </div>
-                <div class="product-card">
-                    <h3>Arroz Dos Hermanos (1 kg)</h3>
-                    <p class="price">$1.600</p>
-                </div>
-                <div class="product-card">
-                    <h3>Puré de Tomates Baggio (530g)</h3>
-                    <p class="price">$1.208</p>
-                </div>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Medallones de Pollo</h3>
+                <div class="price">$1.500</div>
             </div>
-        </section>
-
-        <!-- Sección: Panificados -->
-        <section class="category-section" id="panificados">
-            <h2>🥖 Panificados y Lactales</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <h3>Pan Viena / Panchos (6 u.)</h3>
-                    <p class="price">Consultar</p>
-                </div>
-                <div class="product-card">
-                    <h3>Pan Lactal Plus Ultra</h3>
-                    <p class="price">$2.400</p>
-                </div>
-                <div class="product-card">
-                    <h3>Prepiza (x 2 unidades)</h3>
-                    <p class="price">$2.200</p>
-                </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Medallones de Pollo', -1)">-</button>
+                <span class="qty-display" id="qty-Medallones de Pollo">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Medallones de Pollo', 1)">+</button>
             </div>
-        </section>
+        </div>
+    </div>
 
-    </main>
+    <!-- SECCIÓN BEBIDAS -->
+    <div class="section-title" id="bebidas" onclick="toggleSubmenu('sub-bebidas')">
+        <span>🥤 Bebidas & Gaseosas</span>
+        <i class="fa-solid fa-chevron-down"></i>
+    </div>
+    <div id="sub-bebidas" class="submenu">
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Coca Cola 1.5L Retornable</h3>
+                <div class="price">$2.800</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Coca Cola 1.5L Retornable', -1)">-</button>
+                <span class="qty-display" id="qty-Coca Cola 1.5L Retornable">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Coca Cola 1.5L Retornable', 1)">+</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Fernet Branca 750ml</h3>
+                <div class="price">$9.500</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Fernet Branca 750ml', -1)">-</button>
+                <span class="qty-display" id="qty-Fernet Branca 750ml">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Fernet Branca 750ml', 1)">+</button>
+            </div>
+        </div>
+    </div>
 
+    <!-- Barra Flotante del Carrito -->
+    <div class="cart-bar" onclick="abrirCarrito()">
+        <div>🛒 <span id="cart-count">0</span> productos</div>
+        <div>Total: <span id="cart-total">$0</span></div>
+    </div>
+
+    <!-- Modal del Carrito -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Tu Pedido en El Grinch</h3>
+                <button class="close-cart" onclick="cerrarCarrito()">X</button>
+            </div>
+            <div id="cart-items-list" style="margin-bottom: 15px; font-size: 14px;">
+                <!-- Ítems del carrito -->
+            </div>
+            <h3 style="text-align: right; color: var(--accent-green);">Total: <span id="modal-total">$0</span></h3>
+            <a href="#" id="whatsapp-link" class="whatsapp-btn" target="_blank">Enviar Pedido por WhatsApp</a>
+        </div>
+    </div>
+
+    <script>
+        // Precios de referencia de los productos
+        const precios = {
+            'Pizzas': 2200,
+            'Empanadas': 600,
+            'Medallones de Pollo': 1500,
+            'Coca Cola 1.5L Retornable': 2800,
+            'Fernet Branca 750ml': 9500
+        };
+
+        let carrito = {};
+
+        function toggleSubmenu(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('active');
+        }
+
+        function cambiarCantidad(producto, cambio) {
+            if (!carrito[producto]) carrito[producto] = 0;
+            carrito[producto] += cambio;
+            if (carrito[producto] < 0) carrito[producto] = 0;
+            if (carrito[producto] === 0) delete carrito[producto];
+
+            document.getElementById(`qty-${producto}`).innerText = carrito[producto] || 0;
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            let totalItems = 0;
+            let totalPrice = 0;
+            let listaHTML = '';
+
+            for (let prod in carrito) {
+                let qty = carrito[prod];
+                let subtotal = qty * precios[prod];
+                totalItems += qty;
+                totalPrice += subtotal;
+                listaHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:8px; border-bottom:1px dashed #333; padding-bottom:4px;">
+                    <span>${qty}x ${prod}</span>
+                    <span style="color:var(--accent-green);">$${subtotal}</span>
+                </div>`;
+            }
+
+            if (totalItems === 0) {
+                listaHTML = '<p style="color:var(--text-muted); text-align:center;">El carrito está vacío</p>';
+            }
+
+            document.getElementById('cart-count').innerText = totalItems;
+            document.getElementById('cart-total').innerText = `$${totalPrice}`;
+            document.getElementById('modal-total').innerText = `$${totalPrice}`;
+            document.getElementById('cart-items-list').innerHTML = listaHTML;
+
+            // Generar enlace de WhatsApp
+            let mensaje = "Hola! Kiosco The Grinch, quiero hacer el siguiente pedido:%0A";
+            for (let prod in carrito) {
+                mensaje += `- ${carrito[prod]}x ${prod} ($${carrito[prod] * precios[prod]})%0A`;
+            }
+            mensaje += `%0ATotal: $${totalPrice}`;
+            document.getElementById('whatsapp-link').href = `https://wa.me/5493624000000?text=${mensaje}`;
+        }
+
+        function abrirCarrito() {
+            document.getElementById('cartModal').style.display = 'flex';
+        }
+
+        function cerrarCarrito() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
