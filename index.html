@@ -3,236 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiosco The Grinch</title>
+    <title>Kiosco The Grinch - Catálogo y Pedidos</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0b0f0c; color: #fff; padding-bottom: 90px; }
-        header { text-align: center; padding: 20px; background: #000; border-bottom: 2px solid #00ff41; }
-        h1 { color: #00ff41; font-size: 2rem; text-shadow: 0 0 10px rgba(0,255,65,0.5); }
-        .subtitle { color: #888; font-size: 0.9rem; margin-top: 5px; }
-
-        /* Pantallas */
-        .screen { display: none; padding: 15px; }
-        .screen.active { display: block; }
-
-        /* Menú Principal */
-        .hero-banner { background: linear-gradient(135deg, #112d17, #051408); border: 2px solid #00ff41; border-radius: 15px; padding: 15px; margin-bottom: 20px; text-align: center; }
-        .hero-banner h2 { color: #ff5722; font-size: 1.5rem; margin-bottom: 5px; }
-        
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
-        .menu-card { background: #121c14; border: 2px solid #00ff41; border-radius: 12px; padding: 15px; text-align: center; cursor: pointer; transition: 0.2s; }
-        .menu-card:active { transform: scale(0.95); background: #1a2f1e; }
-        .menu-card h3 { color: #fff; font-size: 1.1rem; margin-bottom: 5px; }
-        .menu-card p { color: #aaa; font-size: 0.8rem; }
-
-        .btn-action { display: block; width: 100%; padding: 12px; border-radius: 12px; text-align: center; font-weight: bold; text-decoration: none; font-size: 1rem; margin-bottom: 12px; border: none; cursor: pointer; }
-        .btn-wsp { background: #00ff41; color: #000; }
-        .btn-map { background: #121c14; color: #00ff41; border: 2px solid #00ff41; }
-
-        /* Categorías / Productos */
-        .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .btn-back { background: #222; color: #fff; border: 1px solid #555; padding: 8px 15px; border-radius: 8px; cursor: pointer; }
-        
-        .product-card { background: #121c14; border: 1px solid #1f3824; border-radius: 10px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
-        .product-info h4 { font-size: 0.95rem; margin-bottom: 4px; color: #fff; }
-        .product-info .price { color: #00ff41; font-weight: bold; font-size: 0.95rem; }
-        
-        .controls { display: flex; align-items: center; gap: 10px; }
-        .controls button { background: #00ff41; color: #000; border: none; width: 30px; height: 30px; border-radius: 50%; font-weight: bold; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .controls span { font-size: 1rem; font-weight: bold; width: 20px; text-align: center; }
-
-        /* Carrito Flotante */
-        .cart-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: #0b1a0e; border-top: 2px solid #00ff41; padding: 15px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.8); }
-        .cart-info { font-size: 1.1rem; font-weight: bold; color: #00ff41; }
-        .btn-checkout { background: #00ff41; color: #000; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; }
+        :root {
+            --bg-color: #0c0f0a;
+            --card-bg: #141c14;
+            --accent-green: #00ff66;
+            --accent-dark-green: #008f39;
+            --text-main: #ffffff;
+            --text-muted: #b0c4de;
+            --danger: #ff4d4d;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 15px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 10px;
+        }
+        header h1 {
+            color: var(--accent-green);
+            font-size: 26px;
+            text-shadow: 0 0 10px rgba(0,255,102,0.5);
+        }
+        header p {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .section-title {
+            font-size: 15px;
+            color: var(--accent-green);
+            margin: 12px 0 8px 0;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: var(--card-bg);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--accent-dark-green);
+        }
+        .submenu {
+            display: none;
+            padding-left: 5px;
+            margin-bottom: 10px;
+        }
+        .submenu.active {
+            display: block;
+        }
+        .product-card {
+            background: #1a261a;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--accent-green);
+        }
+        .product-info h4 {
+            font-size: 13px;
+            margin-bottom: 2px;
+        }
+        .product-info p {
+            font-size: 11px;
+            color: #8fa88f;
+        }
+        .product-price {
+            font-size: 13px;
+            font-weight: bold;
+            color: var(--accent-green);
+            margin-right: 8px;
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        button.qty-btn {
+            background: var(--accent-dark-green);
+            color: white;
+            border: none;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button.qty-btn:active {
+            background: var(--accent-green);
+            color: black;
+        }
+        .cart-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #141c14;
+            border-top: 2px solid var(--accent-green);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 480px;
+            margin: 0 auto;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.8);
+            z-index: 100;
+        }
+        .cart-total {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+        .checkout-btn {
+            background: var(--accent-green);
+            color: black;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Kiosco The Grinch</h1>
-        <p class="subtitle">Tu kiosco de confianza</p>
+        <h1>KIOSCO THE GRINCH</h1>
+        <p>📍 Av. Belgrano 963 | Catálogo Interactivo en Vivo</p>
     </header>
 
-    <!-- PANTALLA PRINCIPAL (HOME) -->
-    <div id="home-screen" class="screen active">
-        <div class="hero-banner">
-            <h2>OFERTAS DEL DÍA</h2>
-            <p>¡No te las pierdas! Consultá los mejores precios.</p>
-        </div>
-
-        <div class="menu-grid">
-            <div class="menu-card" onclick="showCategory('almacen')">
-                <h3>🛒 Almacén</h3>
-                <p>Harinas, fideos, arroz y más</p>
-            </div>
-            <div class="menu-card" onclick="showCategory('bebidas')">
-                <h3>🥤 Bebidas</h3>
-                <p>Gaseosas, jugos y aguas</p>
-            </div>
-            <div class="menu-card" onclick="showCategory('congelados')">
-                <h3>❄️ Congelados</h3>
-                <p>Patitas, medallones y chipá</p>
-            </div>
-            <div class="menu-card" onclick="showCategory('panificados')">
-                <h3>🍞 Panificados</h3>
-                <p>Pan lactal, viena y prepizzas</p>
-            </div>
-        </div>
-
-        <button class="btn-action btn-wsp" onclick="enviarPedidoDirecto()">💬 HACER PEDIDO (Escribinos por WhatsApp)</button>
-        <button class="btn-action btn-map" onclick="alert('Ubicación: Av. Principal / Abierto todos los días.')">📍 CÓMO LLEGAR (Ver ubicación)</button>
+    <div id="catalog-container" style="padding-bottom: 80px;">
+        <!-- Se genera dinámicamente -->
     </div>
 
-    <!-- PANTALLA DE CATEGORÍAS -->
-    <div id="category-screen" class="screen">
-        <div class="category-header">
-            <button class="btn-back" onclick="showHome()">⬅ Volver</button>
-            <h2 id="cat-title" style="color: #00ff41; font-size: 1.2rem;"></h2>
+    <div class="cart-bar">
+        <div>
+            <div style="font-size: 11px; color: var(--text-muted);">Total Carrito:</div>
+            <div class="cart-total" id="cart-total">$0</div>
         </div>
-        <div id="product-list"></div>
-    </div>
-
-    <!-- BARRA DE CARRITO FLOTANTE -->
-    <div class="cart-bar" id="cart-bar" style="display: none;">
-        <div class="cart-info" id="cart-total-text">Total: $0</div>
-        <button class="btn-checkout" onclick="enviarPedidoWhatsApp()">Enviar Pedido 🛍️</button>
+        <button class="checkout-btn" onclick="sendWhatsApp()">Enviar Pedido 📲</button>
     </div>
 
     <script>
-        // BASE DE DATOS DE PRODUCTOS CON PRECIOS NUMÉRICOS
-        const products = {
-            almacen: [
-                { id: 1, name: "Fideos Luquetti 500g", price: 1600 },
-                { id: 2, name: "Fideos Favorita Coditos 500g", price: 1000 },
-                { id: 3, name: "Fideos La Providencia 500g", price: 1200 },
-                { id: 4, name: "Arroz Dos Hermanos 1kg", price: 1600 },
-                { id: 5, name: "Arroz Cañuela 0.5kg", price: 800 },
-                { id: 6, name: "Atún Desmenuzado 170g", price: 2000 },
-                { id: 7, name: "Polenta Presto Pronta Sabor Panceta", price: 1800 },
-                { id: 8, name: "Polenta Presto Pronta Clásica 490g", price: 2000 },
-                { id: 9, name: "Choclo Cremoso Inca 350g", price: 1500 },
-                { id: 10, name: "Choclo Noel 300g", price: 1800 },
-                { id: 11, name: "Puré de Tomates Baggio 530g", price: 1200 },
-                { id: 12, name: "Puré de Tomates Santa Isabel 520g", price: 1000 },
-                { id: 13, name: "Puré de Tomates Big C 210g", price: 500 },
-                { id: 14, name: "Doña Pupa Remolacha en Cubos 340g", price: 2600 },
-                { id: 15, name: "Doña Pupa Jardinera 340g", price: 700 },
-                { id: 16, name: "Doña Pupa Zanahoria en Cubos 340g", price: 1100 },
-                { id: 17, name: "Doña Pupa Lentejas 340g", price: 1600 },
-                { id: 18, name: "Olivas Verdes Castell 200g", price: 1400 },
-                { id: 19, name: "Vinagre de Alcohol San Iginio 1L", price: 1700 },
-                { id: 20, name: "Vinagre de Alcohol Halconero 930ml", price: 1500 },
-                { id: 21, name: "Flow Cereal Almohaditas Frutilla 180g", price: 2000 },
-                { id: 22, name: "Bizcochos 9 de Oro 200g", price: 1600 }
-            ],
-            bebidas: [
-                { id: 23, name: "Coca Cola 1.5L Retornable", price: 2800 },
-                { id: 24, name: "Coca Cola 2.25L Descartable", price: 4000 },
-                { id: 25, name: "Fernet Branca 750ml", price: 9500 },
-                { id: 26, name: "Cerveza Heineken Lata 473ml", price: 2200 }
-            ],
-            congelados: [
-                { id: 27, name: "Medallones Clásicos de Pollo", price: 2500 },
-                { id: 28, name: "Patitas Crunch de Pollo", price: 2800 },
-                { id: 29, name: "Chipá (Paquete 1/2 kg)", price: 3000 }
-            ],
-            panificados: [
-                { id: 30, name: "Pan Viena / Panchos Plus Ultra", price: 1500 },
-                { id: 31, name: "Pan para Hamburguesas Plus Ultra", price: 1500 },
-                { id: 32, name: "Pan Lactal Plus Ultra 400g", price: 2400 },
-                { id: 33, name: "Prepizza (x 1 unidad)", price: 1400 },
-                { id: 34, name: "Prepizza (x 2 unidades)", price: 2200 }
-            ]
-        };
+        const catalog = [
+            {
+                category: "🥤 Gaseosas y Línea Coca-Cola",
+                items: [
+                    {id: 1, name: "Lata Clásica / Chiquitita", desc: "269/310 ml", price: 1300},
+                    {id: 2, name: "Lata Regular (Coca/Sprite/Fanta)", desc: "354 ml", price: 1400},
+                    {id: 3, name: "Botellita PET Chiquitita", desc: "250/300 ml", price: 1000},
+                    {id: 4, name: "Botella PET 500 ml", desc: "Mediana", price: 1800},
+                    {id: 5, name: "Botella PET 600 ml", desc: "Popular", price: 2000},
+                    {id: 6, name: "Botella PET 1.5 Litros", desc: "Litro y Medio", price: 2800},
+                    {id: 7, name: "Botella PET 2.25 Litros", desc: "Familiar grande", price: 3500},
+                    {id: 8, name: "Pepsi / 7Up", desc: "1.5L / 2.25L", price: 2600},
+                    {id: 9, name: "Pepsi / 7Up Lata", desc: "354 ml", price: 1300}
+                ]
+            },
+            {
+                category: "🍺 Cervezas, Energizantes y Aperitivos",
+                items: [
+                    {id: 10, name: "Cerveza en Lata (Heineken/Quilmes/Brahma)", desc: "473 ml", price: 2000},
+                    {id: 11, name: "Bebida Energizante Speed Unlimited", desc: "Lata 473 ml", price: 2200},
+                    {id: 12, name: "Licor Fino de Café al Coñac New Style", desc: "200 cm³", price: 2000}
+                ]
+            },
+            {
+                category: "🧃 Aguas, Terma y Jugos",
+                items: [
+                    {id: 13, name: "Agua Mineral Sin Gas", desc: "500 ml / 1.5 L", price: 1200},
+                    {id: 14, name: "Soda / Agua Gasificada", desc: "Sifón / Descartable", price: 1500},
+                    {id: 15, name: "Terma (Herbal / Citrus)", desc: "710 ml", price: 2400},
+                    {id: 16, name: "Jugo Baggio", desc: "Tetra Litro", price: 1600},
+                    {id: 17, name: "Jugo Ades", desc: "Tetra Litro", price: 1800},
+                    {id: 18, name: "Jugo Aquarius", desc: "500 ml / 1.5 L", price: 1700},
+                    {id: 19, name: "Jugo Cepita", desc: "Tetra Litro", price: 1800}
+                ]
+            },
+            {
+                category: "🥩 Fiambres al Corte y Combos",
+                items: [
+                    {id: 20, name: "Jamón Cocido Cortado a Máquina", desc: "100g / 200g", price: 1800},
+                    {id: 21, name: "Paleta Cortada a Máquina", desc: "100g / 200g", price: 1400},
+                    {id: 22, name: "Queso de Máquina / Tybo Cortado", desc: "100g / 200g", price: 1800},
+                    {id: 23, name: "Salame Milán Cortado a Máquina", desc: "100g / 200g", price: 2200},
+                    {id: 24, name: "Combo Paleta y Queso", desc: "200g + 200g", price: 3000},
+                    {id: 25, name: "Combo Queso y Salame Milán", desc: "200g + 200g", price: 3800},
+                    {id: 26, name: "Queso Cremoso Fraccionado", desc: "Por kg / Porción", price: 6500}
+                ]
+            },
+            {
+                category: "🥚 Almacén, Frescos y Conservas",
+                items: [
+                    {id: 27, name: "Huevos B1 (Media Docena)", desc: "6 unidades", price: 3000},
+                    {id: 28, name: "Huevos B1 (Docena)", desc: "12 unidades", price: 6000},
+                    {id: 29, name: "Huevos B1 (Maple Completo)", desc: "30 unidades", price: 6000},
+                    {id: 30, name: "Polenta Instantánea Presto Pronta", desc: "490 g", price: 2000},
+                    {id: 31, name: "Polenta Saborizada Panceta y Queso", desc: "250 g", price: 1800},
+                    {id: 32, name: "Remolacha / Jardinera Doña Pupa", desc: "340 g", price: 700},
+                    {id: 33, name: "Zanahoria / Lentejas Doña Pupa", desc: "340 g", price: 1200},
+                    {id: 34, name: "Puré de Tomates Santa Isabel", desc: "520 g", price: 1200},
+                    {id: 35, name: "Sopa Knorr Quick (Sobres)", desc: "Caja x5 / Unit", price: 3400}
+                ]
+            },
+            {
+                category: "🍫 Golosinas, Librería y Varios",
+                items: [
+                    {id: 36, name: "Bon O Bon (Clásico / Blanco)", desc: "Unidad", price: 300},
+                    {id: 37, name: "Caramelos Misky (Sueltos)", desc: "Unidad", price: 150},
+                    {id: 38, name: "Chupetín Billiken", desc: "Unidad", price: 400},
+                    {id: 39, name: "Alfajor Terrabusi Torta x3", desc: "70 g", price: 1800},
+                    {id: 40, name: "Pilas Energizer CR2032", desc: "Blister 3V", price: 2100},
+                    {id: 41, name: "Adhesivo La Gotita", desc: "Pomo 2 ml", price: 1500},
+                    {id: 42, name: "Naipes El Padrino", desc: "Mazo 40 cartas", price: 2500},
+                    {id: 43, name: "Preservativos Playboy", desc: "Caja individual", price: 1700}
+                ]
+            }
+        ];
 
         let cart = {};
 
-        function showCategory(catKey) {
-            document.getElementById('home-screen').classList.remove('active');
-            document.getElementById('category-screen').classList.add('active');
-            
-            const titles = { almacen: 'Almacén y Harinas', bebidas: 'Bebidas', congelados: 'Congelados', panificados: 'Panificados' };
-            document.getElementById('cat-title').innerText = titles[catKey];
-
-            let html = '';
-            products[catKey].forEach(prod => {
-                let qty = cart[prod.id] ? cart[prod.id].qty : 0;
-                html += `
-                    <div class="product-card">
-                        <div class="product-info">
-                            <h4>${prod.name}</h4>
-                            <div class="price">$${prod.price.toLocaleString()}</div>
-                        </div>
-                        <div class="controls">
-                            <button onclick="changeQty(${prod.id}, -1, '${catKey}')">-</button>
-                            <span id="qty-${prod.id}">${qty}</span>
-                            <button onclick="changeQty(${prod.id}, 1, '${catKey}')">+</button>
-                        </div>
+        function renderCatalog() {
+            const container = document.getElementById('catalog-container');
+            container.innerHTML = '';
+            catalog.forEach((sec, idx) => {
+                let div = document.createElement('div');
+                div.innerHTML = `
+                    <div class="section-title" onclick="toggleSubmenu(${idx})">
+                        <span>${sec.category}</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="submenu ${idx === 0 ? 'active' : ''}" id="sub-${idx}">
+                        ${sec.items.map(item => `
+                            <div class="product-card">
+                                <div class="product-info">
+                                    <h4>${item.name}</h4>
+                                    <p>${item.desc}</p>                                 </div>                                 <div style="display: flex; align-items: center;">                                     <span class="product-price">$${item.price.toLocaleString()}</span>
+                                    <div class="controls">
+                                        <button class="qty-btn" onclick="updateCart(${item.id}, '${item.name}',${item.price}, -1)">-</button>
+                                        <span id="qty-${item.id}" style="min-width: 20px; text-align: center; font-size: 13px;">${cart[item.id] ? cart[item.id].qty : 0}</span>
+                                        <button class="qty-btn" onclick="updateCart(${item.id}, '${item.name}',${item.price}, 1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
                     </div>
                 `;
+                container.appendChild(div);
             });
-            document.getElementById('product-list').innerHTML = html;
         }
 
-        function showHome() {
-            document.getElementById('category-screen').classList.remove('active');
-            document.getElementById('home-screen').classList.add('active');
-            updateCartBar();
+        function toggleSubmenu(idx) {
+            const sub = document.getElementById(`sub-${idx}`);
+            sub.classList.toggle('active');
         }
 
-        function changeQty(id, change, catKey) {
-            let prod = products[catKey].find(p => p.id === id);
+        function updateCart(id, name, price, change) {
             if (!cart[id]) {
-                cart[id] = { name: prod.name, price: prod.price, qty: 0 };
-            }
-            cart[id].qty += change;
-            if (cart[id].qty < 0) cart[id].qty = 0;
-            
-            document.getElementById(`qty-${id}`).innerText = cart[id].qty;
-
-            if (cart[id].qty === 0) {
-                delete cart[id];
-            }
-            updateCartBar();
-        }
-
-        function updateCartBar() {
-            let totalItems = 0;
-            let totalPrice = 0;
-            for (let id in cart) {
-                totalItems += cart[id].qty;
-                totalPrice += cart[id].qty * cart[id].price;
-            }
-
-            const bar = document.getElementById('cart-bar');
-            if (totalItems > 0) {
-                bar.style.display = 'flex';
-                document.getElementById('cart-total-text').innerText = `Total: $${totalPrice.toLocaleString()}`;
+                if (change > 0) {
+                    cart[id] = {name, price, qty: change};
+                }
             } else {
-                bar.style.display = 'none';
+                cart[id].qty += change;
+                if (cart[id].qty <= 0) {
+                    delete cart[id];
+                }
             }
+            document.getElementById(`qty-${id}`).innerText = cart[id] ? cart[id].qty : 0;
+            updateTotal();
         }
 
-        function enviarPedidoWhatsApp() {
-            let mensaje = "Hola! Quiero hacer el siguiente pedido en Kiosco The Grinch:%0A";
+        function updateTotal() {
             let total = 0;
             for (let id in cart) {
-                let subtotal = cart[id].qty * cart[id].price;
-                total += subtotal;
-                mensaje += `- ${cart[id].qty}x ${cart[id].name} ($${subtotal.toLocaleString()})%0A`;
+                total += cart[id].price * cart[id].qty;
             }
-            mensaje += `%0A*Total a Pagar: $${total.toLocaleString()}*`;
-            
-            let numeroWhatsApp = "5493794000000"; // Reemplazá con tu número de WhatsApp
-            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+            document.getElementById('cart-total').innerText = '$' + total.toLocaleString();
         }
 
-        function enviarPedidoDirecto() {
-            let mensaje = "Hola! Quisiera hacer un pedido en Kiosco The Grinch.";
-            let numeroWhatsApp = "5493794000000"; // Reemplazá con tu número de WhatsApp
-            window.open(`https://wa.me/${numeroWhatsApp}?text=${mensaje}`, '_blank');
+        function sendWhatsApp() {
+            let text = "Hola! Kiosco The Grinch 🟢 - Quiero hacer el siguiente pedido:\n\n";
+            let total = 0;
+            for (let id in cart) {
+                let sub = cart[id].price * cart[id].qty;
+                text += `• ${cart[id].qty}x ${cart[id].name} ($${sub.toLocaleString()})\n`;
+                total += sub;
+            }
+            if (total === 0) {
+                alert("El carrito está vacío. Seleccioná al menos un producto.");
+                return;
+            }
+            text += `\n*TOTAL A PAGAR: $${total.toLocaleString()}*`;
+            let url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
         }
+
+        renderCatalog();
     </script>
 </body>
 </html>
