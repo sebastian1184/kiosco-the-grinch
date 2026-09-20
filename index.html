@@ -3,159 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiosco The Grinch - Catálogo General y Pedidos</title>
+    <title>Kiosco The Grinch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #121212;
-            --bg-card: #1a1a1a;
+            --bg-dark: #0af00a;
+            --bg-card: #141f17;
             --neon-green: #00ff66;
-            --text-white: #ffffff;
-            --text-gray: #b0b0b0;
-            --border-color: #2c3e50;
+            --neon-border: #00cc52;
+            --text-white: #FFFFFF;
+            --text-gray: #b4c4b4;
+            --accent-red: #ff3333;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-white); padding-bottom: 80px; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            padding-bottom: 80px;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
+        .app-header {
+            background: linear-gradient(180deg, #122618 0%, #0a0f0d 100%);
             padding: 15px;
-            background-color: var(--bg-card);
             border-bottom: 2px solid var(--neon-green);
+            text-align: center;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        header h1 {
-            color: var(--neon-green);
+        .app-header h1 {
             font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: var(--neon-green);
             text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
         }
 
-        header p {
-            font-size: 0.85rem;
+        .sub-header {
+            font-size: 0.75rem;
             color: var(--text-gray);
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
-        .container {
-            padding: 15px;
-        }
-
-        /* Categorías principales */
-        .categorias {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .categoria-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .categoria-card:hover {
-            border-color: var(--neon-green);
-        }
-
-        .categoria-card h3 {
-            font-size: 1.1rem;
-            color: var(--text-white);
-        }
-
-        .categoria-card i {
-            color: var(--neon-green);
-            font-size: 1.2rem;
-        }
-
-        /* Botonera inferior fija para pedidos */
-        .footer-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-card);
-            border-top: 1px solid var(--border-color);
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 480px;
+        .app-main {
+            padding: 12px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .btn-whatsapp {
-            background-color: var(--neon-green);
-            color: var(--bg-dark);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            cursor: pointer;
-            text-decoration: none;
+        /* Banner Ofertas */
+        .banner-ofertas {
+            background: linear-gradient(135deg, #250d0d 14%, #141f17 100%);
+            border: 2px solid var(--accent-red);
+            border-radius: 14px;
+            padding: 12px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            text-decoration: none;
+            color: var(--text-white);
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.25);
+        }
+
+        .banner-ofertas img {
+            width: 90px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--accent-red);
+        }
+
+        .banner-info h2 {
+            font-size: 1rem;
+            color: #ff6666;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .banner-info p {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin-top: 5px;
+        }
+
+        /* Tarjetas Visuales de Secciones */
+        .grid-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .card-visual {
+            background-color: var(--bg-card);
+            border: 2px solid var(--neon-border);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-white);
+            transition: transform 0.1s;
+            box-shadow: 0 4px 10px rgba(0, 255, 102, 0.1);
+            cursor: pointer;
+        }
+
+        .card-visual:active {
+            transform: scale(0.96);
+        }
+
+        .card-img-container {
+            width: 110px;
+            height: 95px;
+            flex-shrink: 0;
+            background: #000;
+            position: relative;
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        .card-content {
+            padding: 12px;
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-text h3 {
+            font-size: 1rem;
+            color: var(--neon-green);
+            margin-bottom: 4px;
+        }
+
+        .card-text p {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            line-height: 1.2;
+        }
+
+        .card-arrow {
+            font-size: 1.2rem;
+            color: var(--neon-green);
+            background: rgba(0, 255, 102, 0.1);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Secciones desplegables / Listados detallados */
+        .detalle-seccion {
+            background: var(--bg-card);
+            border: 2px solid var(--neon-green);
+            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .detalle-seccion.activo {
+            display: block;
+        }
+
+        .detalle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .detalle-header h3 {
+            font-size: 1.1rem;
+            color: var(--neon-green);
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <header class="app-header">
         <h1>KIOSCO THE GRINCH</h1>
-        <p><i class="fa-solid fa-location-dot"></i> Av. Belgrano 963 | Tu kiosco de confianza</p>
+        <div class="sub-header">Av. Belgrano 963 | Tu kiosco de confianza</div>
     </header>
 
-    <div class="container">
-        <div class="categorias">
-            <div class="categoria-card">
-                <h3>🥤 Bebidas (Gaseosas, Cervezas, Fernet)</h3>
-                <i class="fa-solid fa-chevron-right"></i>
+    <main class="app-main">
+        <!-- Banner de Ofertas -->
+        <a href="#" class="banner-ofertas">
+            <div class="banner-info">
+                <h2><i class="fa-solid fa-fire"></i> OFERTAS DEL DÍA</h2>
+                <p>¡No te las pierdas! Pizzas, picadas, promos y bebidas.</p>
             </div>
-            <div class="categoria-card">
-                <h3>🍕 Comidas (Pizzas, Empanadas, Patys)</h3>
-                <i class="fa-solid fa-chevron-right"></i>
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591" alt="Oferta">
+        </a>
+
+        <!-- Secciones Principales -->
+        <div class="grid-visual">
+            <div class="card-visual">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591" alt="Comidas">
+                </div>
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>COMIDAS</h3>
+                        <p>Pizzas • Empanadas • Tartas • Congelados</p>
+                    </div>
+                    <div class="card-arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
             </div>
-            <div class="categoria-card">
-                <h3>🍫 Kiosco & Dulces (Golosinas, Snacks)</h3>
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-            <div class="categoria-card">
-                <h3>✨ Novedades & Otros (Limpieza, Varios)</h3>
-                <i class="fa-solid fa-chevron-right"></i>
+
+            <div class="card-visual">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87" alt="Bebidas">
+                </div>
+                <div class="card-content">
+                    <div class="card-text">
+                        <h3>BEBIDAS</h3>
+                        <p>Gaseosas • Cervezas • Fernet • Vinos</p>
+                    </div>
+                    <div class="card-arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="footer-nav">
-        <span>🛒 Carrito: <strong>0 ítems</strong></span>
-        <a href="https://wa.me/" class="btn-whatsapp" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i> Hacer Pedido
-        </a>
-    </div>
+    </main>
 
 </body>
 </html>
