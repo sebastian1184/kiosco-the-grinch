@@ -9,18 +9,28 @@
         :root {
             --bg-dark: #0af00a;
             --bg-card: #141f17;
-            --neon-green: #00ff66;
+            --neon-green: #00ff60;
             --neon-border: #00cc52;
-            --text-white: #FFFFFF;
+            --text-white: #ffffff;
             --text-gray: #b4c4b4;
             --accent-red: #ff3333;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-white); padding-bottom: 80px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            padding-bottom: 80px;
+        }
 
         .app-header {
-            background: linear-gradient(180deg, #122618 0%, #0a0f0d 100%);
+            background: linear-gradient(180deg, #122018 0%, #0af00a 100%);
             padding: 15px;
             border-bottom: 2px solid var(--neon-green);
             text-align: center;
@@ -64,126 +74,42 @@
             box-shadow: 0 0 15px rgba(255, 51, 51, 0.25);
         }
 
-        .banner-ofertas img {
-            width: 90px;
-            height: 75px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid var(--accent-red);
+        .category-section {
+            margin-bottom: 20px;
         }
 
-        .banner-info h2 {
-            font-size: 1rem;
-            color: #ff6666;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .banner-info p {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            margin-top: 5px;
-        }
-
-        /* Tarjetas Visuales de Secciones */
-        .grid-visual {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .card-visual {
-            background-color: var(--bg-card);
-            border: 2px solid var(--neon-border);
-            border-radius: 14px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--text-white);
-            transition: transform 0.1s;
-            box-shadow: 0 4px 10px rgba(0, 255, 102, 0.1);
-            cursor: pointer;
-        }
-
-        .card-visual:active {
-            transform: scale(0.96);
-        }
-
-        .card-img-container {
-            width: 110px;
-            height: 95px;
-            flex-shrink: 0;
-            background: #000;
-            position: relative;
-        }
-
-        .card-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.9;
-        }
-
-        .card-content {
-            padding: 12px;
-            flex-grow: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .card-text h3 {
-            font-size: 1rem;
-            color: var(--neon-green);
-            margin-bottom: 4px;
-        }
-
-        .card-text p {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            line-height: 1.2;
-        }
-
-        .card-arrow {
-            font-size: 1.2rem;
-            color: var(--neon-green);
-            background: rgba(0, 255, 102, 0.1);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        /* Secciones desplegables / Listados detallados */
-        .detalle-seccion {
-            background: var(--bg-card);
-            border: 2px solid var(--neon-green);
-            border-radius: 14px;
-            padding: 14px;
-            margin-bottom: 15px;
-            display: none;
-        }
-
-        .detalle-seccion.activo {
-            display: block;
-        }
-
-        .detalle-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .detalle-header h3 {
+        .category-section h2 {
             font-size: 1.1rem;
             color: var(--neon-green);
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--neon-border);
+            padding-bottom: 5px;
+        }
+
+        .product-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--neon-border);
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-card h3 {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .product-card .price {
+            font-size: 0.9rem;
+            color: var(--neon-green);
+            font-weight: bold;
         }
     </style>
 </head>
@@ -191,52 +117,83 @@
 
     <header class="app-header">
         <h1>KIOSCO THE GRINCH</h1>
-        <div class="sub-header">Av. Belgrano 963 | Tu kiosco de confianza</div>
+        <div class="sub-header">Catálogo Oficial</div>
     </header>
 
     <main class="app-main">
-        <!-- Banner de Ofertas -->
+
+        <!-- Banner Ofertas -->
         <a href="#" class="banner-ofertas">
-            <div class="banner-info">
-                <h2><i class="fa-solid fa-fire"></i> OFERTAS DEL DÍA</h2>
-                <p>¡No te las pierdas! Pizzas, picadas, promos y bebidas.</p>
+            <div>
+                <h3>¡Ofertas Especiales!</h3>
+                <p style="font-size: 0.8rem; color: var(--text-gray);">Mirá los descuentos de la semana</p>
             </div>
-            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591" alt="Oferta">
+            <i class="fa-solid fa-chevron-right" style="color: var(--accent-red);"></i>
         </a>
 
-        <!-- Secciones Principales -->
-        <div class="grid-visual">
-            <div class="card-visual">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591" alt="Comidas">
+        <!-- Sección: Almacén y Harinas -->
+        <section class="category-section" id="almacen">
+            <h2>Almacén, Harinas y Fideos</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>Harina Favorita 000</h3>
+                    <p class="price">Consultar</p>
                 </div>
-                <div class="card-content">
-                    <div class="card-text">
-                        <h3>COMIDAS</h3>
-                        <p>Pizzas • Empanadas • Tartas • Congelados</p>
-                    </div>
-                    <div class="card-arrow">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
+                <div class="product-card">
+                    <h3>Sal Fina Celusal (0.5 kg)</h3>
+                    <p class="price">Consultar</p>
+                </div>
+                <div class="product-card">
+                    <h3>Fideos Lucchetti (Tirabuzón / Coditos) 500g</h3>
+                    <p class="price">Consultar</p>
+                </div>
+                <div class="product-card">
+                    <h3>Arroz Dos Hermanos (1 kg)</h3>
+                    <p class="price">$1.600</p>
+                </div>
+                <div class="product-card">
+                    <h3>Puré de Tomates Baggio (530g)</h3>
+                    <p class="price">$1.208</p>
                 </div>
             </div>
+        </section>
 
-            <div class="card-visual">
-                <div class="card-img-container">
-                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87" alt="Bebidas">
+        <!-- Sección: Congelados -->
+        <section class="category-section" id="congelados">
+            <h2>Congelados y Panificados de Freezer</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>Medallones Clásicos de Pollo</h3>
+                    <p class="price">Consultar</p>
                 </div>
-                <div class="card-content">
-                    <div class="card-text">
-                        <h3>BEBIDAS</h3>
-                        <p>Gaseosas • Cervezas • Fernet • Vinos</p>
-                    </div>
-                    <div class="card-arrow">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
+                <div class="product-card">
+                    <h3>Patitas de Pollo Tradicionales</h3>
+                    <p class="price">Consultar</p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Sección: Panificados -->
+        <section class="category-section" id="panificados">
+            <h2>Panificados y Lactales</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>Pan Viena / Panchos Plus Ultra (6 u.)</h3>
+                    <p class="price">Consultar</p>
+                </div>
+                <div class="product-card">
+                    <h3>Pan Lactal Plus Ultra (Blanco o Salvado)</h3>
+                    <p class="price">$2.400</p>
+                </div>
+                <div class="product-card">
+                    <h3>Prepiza (x 2 unidades)</h3>
+                    <p class="price">$2.200</p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
 </body>
 </html>
+
