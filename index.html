@@ -4,164 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kiosco The Grinch - Catálogo General y Pedidos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0c0f0a;
-            --card-bg: #141c14;
-            --accent-green: #00ff66;
-            --accent-dark-green: #008f39;
-            --text-main: #ffffff;
-            --text-muted: #b0c4de;
+            --bg-dark: #121212;
+            --bg-card: #1a1a1a;
+            --neon-green: #00ff66;
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --border-color: #2c3e50;
         }
+
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding: 15px;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            padding-bottom: 80px;
             max-width: 480px;
             margin: 0 auto;
         }
+
         header {
             text-align: center;
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--accent-green);
-            padding-bottom: 10px;
+            padding: 15px;
+            background-color: var(--bg-card);
+            border-bottom: 2px solid var(--neon-green);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
+
         header h1 {
-            color: var(--accent-green);
-            font-size: 24px;
-            text-shadow: 0 0 10px rgba(0,255,102,0.5);
+            color: var(--neon-green);
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
         }
+
         header p {
-            font-size: 12px;
-            color: var(--text-muted);
+            font-size: 0.85rem;
+            color: var(--text-gray);
             margin-top: 4px;
         }
-        /* Botonera Principal */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
+
+        .container {
+            padding: 15px;
         }
-        .cat-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--accent-dark-green);
-            color: var(--text-main);
-            padding: 14px 10px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            transition: 0.2s;
-        }
-        .cat-btn:active, .cat-btn.active {
-            background: var(--accent-dark-green);
-            border-color: var(--accent-green);
-            color: var(--accent-green);
-        }
-        .section-header {
+
+        /* Categorías principales */
+        .categorias {
             display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .categoria-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            background: var(--card-bg);
-            padding: 10px 15px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            border-left: 4px solid var(--accent-green);
-        }
-        .section-header h2 {
-            font-size: 15px;
-            color: var(--accent-green);
-        }
-        .back-btn {
-            background: #222;
-            color: var(--text-muted);
-            border: 1px solid #444;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 11px;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
-        .product-card {
-            background: #1a261a;
-            padding: 10px 12px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 4px solid var(--accent-green);
+
+        .categoria-card:hover {
+            border-color: var(--neon-green);
         }
-        .product-info h4 {
-            font-size: 13px;
-            margin-bottom: 2px;
+
+        .categoria-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-white);
         }
-        .product-info p {
-            font-size: 11px;
-            color: #8fa88f;
+
+        .categoria-card i {
+            color: var(--neon-green);
+            font-size: 1.2rem;
         }
-        .product-price {
-            font-size: 13px;
-            font-weight: bold;
-            color: var(--accent-green);
-            margin-right: 8px;
-        }
-        .controls {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        button.qty-btn {
-            background: var(--accent-dark-green);
-            color: white;
-            border: none;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        button.qty-btn:active {
-            background: var(--accent-green);
-            color: black;
-        }
-        .cart-bar {
+
+        /* Botonera inferior fija para pedidos */
+        .footer-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: #141c14;
-            border-top: 2px solid var(--accent-green);
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
             padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 480px;
             margin: 0 auto;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.8);
-            z-index: 100;
         }
-        .cart-total {
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--accent-green);
-        }
-        .checkout-btn {
-            background: var(--accent-green);
-            color: black;
+
+        .btn-whatsapp {
+            background-color: var(--neon-green);
+            color: var(--bg-dark);
             border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-weight: bold;
+            font-size: 0.95rem;
             cursor: pointer;
-            font-size: 13px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
     </style>
 </head>
@@ -169,218 +126,36 @@
 
     <header>
         <h1>KIOSCO THE GRINCH</h1>
-        <p>📍 Av. Belgrano 963 | Seleccioná una categoría</p>
+        <p><i class="fa-solid fa-location-dot"></i> Av. Belgrano 963 | Tu kiosco de confianza</p>
     </header>
 
-    <!-- Vista de Botones de Categorías -->
-    <div id="home-view">
-        <div class="categories-grid" id="categories-grid">
-            <!-- Se generan dinámicamente -->
+    <div class="container">
+        <div class="categorias">
+            <div class="categoria-card">
+                <h3>🥤 Bebidas (Gaseosas, Cervezas, Fernet)</h3>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="categoria-card">
+                <h3>🍕 Comidas (Pizzas, Empanadas, Patys)</h3>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="categoria-card">
+                <h3>🍫 Kiosco & Dulces (Golosinas, Snacks)</h3>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+            <div class="categoria-card">
+                <h3>✨ Novedades & Otros (Limpieza, Varios)</h3>
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
         </div>
     </div>
 
-    <!-- Vista de Productos de la Categoría Seleccionada -->
-    <div id="products-view" style="display: none; padding-bottom: 80px;">
-        <div class="section-header">
-            <h2 id="current-category-title">Categoría</h2>
-            <button class="back-btn" onclick="showHome()">← Volver</button>
-        </div>
-        <div id="products-container">
-            <!-- Productos cargados dinámicamente -->
-        </div>
+    <div class="footer-nav">
+        <span>🛒 Carrito: <strong>0 ítems</strong></span>
+        <a href="https://wa.me/" class="btn-whatsapp" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i> Hacer Pedido
+        </a>
     </div>
 
-    <div class="cart-bar">
-        <div>
-            <div style="font-size: 11px; color: var(--text-muted);">Total Carrito:</div>
-            <div class="cart-total" id="cart-total">$0</div>
-        </div>
-        <button class="checkout-btn" onclick="sendWhatsApp()">Enviar Pedido 📲</button>
-    </div>
-
-    <script>
-        const catalog = [
-            {
-                id: 0,
-                name: "🥤 Bebidas y Gaseosas",
-                items: [
-                    {id: 1, name: "Lata Chiquitita / Clásica", desc: "269/310 ml", price: 1300},
-                    {id: 2, name: "Lata Regular (354 ml)", desc: "Lata aluminio", price: 1400},
-                    {id: 3, name: "Botellita PET Chiquitita", desc: "250/300 ml", price: 1000},
-                    {id: 4, name: "Botella PET 500 ml", desc: "Mediana", price: 1800},
-                    {id: 5, name: "Botella PET 600 ml", desc: "Popular", price: 2000},
-                    {id: 6, name: "Botella PET 1.5 Litros", desc: "Litro y medio", price: 2800},
-                    {id: 7, name: "Botella PET 2.25 Litros", desc: "Familiar", price: 3500},
-                    {id: 8, name: "Vidrio Retornable 1 Litro", desc: "Clásica helada", price: 2800},
-                    {id: 9, name: "Vidrio Retornable 2 Litros / 2.25L", desc: "Familiar retornable", price: 3600},
-                    {id: 10, name: "Pepsi / 7Up Descartable", desc: "1.5L / 2.25L", price: 2600},
-                    {id: 11, name: "Pepsi / 7Up Lata", desc: "354 ml", price: 1300},
-                    {id: 12, name: "Cerveza en Lata (Heineken/Quilmes/Brahma)", desc: "473 ml", price: 2000},
-                    {id: 13, name: "Bebida Energizante Speed Unlimited", desc: "Lata 473 ml", price: 2200},
-                    {id: 14, name: "Licor Fino de Café al Coñac New Style", desc: "200 cm³", price: 2000}
-                ]
-            },
-            {
-                id: 1,
-                name: "🧃 Aguas, Sodas y Jugos",
-                items: [
-                    {id: 15, name: "Agua Mineral Sin Gas", desc: "500 ml / 1.5 L", price: 1200},
-                    {id: 16, name: "Soda / Agua Gasificada", desc: "Sifón / Descartable", price: 1500},
-                    {id: 17, name: "Terma (Herbal / Citrus)", desc: "710 ml", price: 2400},
-                    {id: 18, name: "Jugo Baggio", desc: "Tetra Litro", price: 1600},
-                    {id: 19, name: "Jugo Ades", desc: "Tetra Litro", price: 1800},
-                    {id: 20, name: "Jugo Aquarius", desc: "500 ml / 1.5 L", price: 1700},
-                    {id: 21, name: "Jugo Cepita", desc: "Tetra Litro", price: 1800}
-                ]
-            },
-            {
-                id: 2,
-                name: "🥩 Fiambres y Lácteos",
-                items: [
-                    {id: 22, name: "Jamón Cocido Cortado a Máquina", desc: "100g / 200g", price: 1800},
-                    {id: 23, name: "Paleta Cortada a Máquina", desc: "100g / 200g", price: 1400},
-                    {id: 24, name: "Queso de Máquina / Tybo Cortado", desc: "100g / 200g", price: 1800},
-                    {id: 25, name: "Salame Milán Cortado a Máquina", desc: "100g / 200g", price: 2200},
-                    {id: 26, name: "Combo Paleta y Queso", desc: "200g + 200g", price: 3000},
-                    {id: 27, name: "Combo Queso y Salame Milán", desc: "200g + 200g", price: 3800},
-                    {id: 28, name: "Queso Cremoso Fraccionado", desc: "Por kg / Porción", price: 6500},
-                    {id: 41, name: "Queso Rallado La Paulina / Tremblay", desc: "Sobre 40 g", price: 1500}
-                ]
-            },
-            {
-                id: 3,
-                name: "🛒 Almacén y Conservas",
-                items: [
-                    {id: 29, name: "Huevos B1 (Media Docena)", desc: "6 unidades", price: 3000},
-                    {id: 30, name: "Huevos B1 (Docena)", desc: "12 unidades", price: 6000},
-                    {id: 31, name: "Huevos B1 (Maple Completo)", desc: "30 unidades", price: 6000},
-                    {id: 32, name: "Polenta Instantánea Presto Pronta", desc: "490 g", price: 2000},
-                    {id: 33, name: "Polenta Saborizada Panceta y Queso", desc: "250 g", price: 1800},
-                    {id: 34, name: "Remolacha / Jardinera Doña Pupa", desc: "340 g", price: 700},
-                    {id: 35, name: "Zanahoria / Lentejas Doña Pupa", desc: "340 g", price: 1200},
-                    {id: 36, name: "Choclo Cremoso Inca / Arvejas", desc: "350 g", price: 1500},
-                    {id: 37, name: "Olivas Verdes Castell", desc: "200 g", price: 1400},
-                    {id: 38, name: "Puré de Tomates Santa Isabel / Baggio", desc: "520/530 g", price: 1200},
-                    {id: 39, name: "Puré de Tomates Big Choice", desc: "210 g", price: 700},
-                    {id: 40, name: "Sopa Knorr Quick (Sobres)", desc: "Caja x5 / Unit", price: 3400},
-                    {id: 42, name: "Vinagre de Alcohol Halconero / San Iginio", desc: "930ml / 1L", price: 1600}
-                ]
-            },
-            {
-                id: 4,
-                name: "🍫 Golosinas y Snacks",
-                items: [
-                    {id: 43, name: "Bon O Bon (Clásico / Blanco)", desc: "Unidad", price: 300},
-                    {id: 44, name: "Caramelos Misky (Sueltos)", desc: "Unidad", price: 150},
-                    {id: 45, name: "Chupetín Billiken", desc: "Unidad", price: 400},
-                    {id: 46, name: "Alfajor Terrabusi Torta x3", desc: "70 g", price: 1800}
-                ]
-            },
-            {
-                id: 5,
-                name: "🧹 Limpieza y Varios",
-                items: [
-                    {id: 47, name: "Pilas Energizer CR2032", desc: "Blister 3V", price: 2100},
-                    {id: 48, name: "Adhesivo La Gotita", desc: "Pomo 2 ml", price: 1500},
-                    {id: 49, name: "Naipes El Padrino", desc: "Mazo 40 cartas", price: 2500},
-                    {id: 50, name: "Pañuelos Elite (x10) / Fósforos Buenos Días", desc: "Pack / Caja", price: 1300},
-                    {id: 51, name: "Encendedores Candela", desc: "Unidad", price: 500},
-                    {id: 52, name: "Preservativos Playboy", desc: "Caja individual", price: 1700},
-                    {id: 53, name: "Productos de Limpieza Varios", desc: "Litro", price: 1500}
-                ]
-            }
-        ];
-
-        let cart = {};
-
-        function renderCategories() {
-            const grid = document.getElementById('categories-grid');
-            grid.innerHTML = '';
-            catalog.forEach(cat => {
-                let btn = document.createElement('button');
-                btn.className = 'cat-btn';
-                btn.innerText = cat.name;
-                btn.onclick = () => showCategory(cat.id);
-                grid.appendChild(btn);
-            });
-        }
-
-        function showCategory(catId) {
-            const cat = catalog.find(c => c.id === catId);
-            document.getElementById('current-category-title').innerText = cat.name;
-            
-            const container = document.getElementById('products-container');
-            container.innerHTML = cat.items.map(item => `
-                <div class="product-card">
-                    <div class="product-info">
-                        <h4>${item.name}</h4>
-                        <p>${item.desc}</p>
-                    </div>
-                    <div style="display: flex; align-items: center;">
-                        <span class="product-price">$${item.price.toLocaleString()}</span>
-                        <div class="controls">
-                            <button class="qty-btn" onclick="updateCart(${item.id}, '${item.name}', ${item.price}, -1)">-</button>
-                            <span id="qty-${item.id}" style="min-width: 20px; text-align: center; font-size: 13px;">${cart[item.id] ? cart[item.id].qty : 0}</span>
-                            <button class="qty-btn" onclick="updateCart(${item.id}, '${item.name}', ${item.price}, 1)">+</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-
-            document.getElementById('home-view').style.display = 'none';
-            document.getElementById('products-view').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        function showHome() {
-            document.getElementById('products-view').style.display = 'none';
-            document.getElementById('home-view').style.display = 'block';
-        }
-
-        function updateCart(id, name, price, change) {
-            if (!cart[id]) {
-                if (change > 0) {
-                    cart[id] = {name, price, qty: change};
-                }
-            } else {
-                cart[id].qty += change;
-                if (cart[id].qty <= 0) {
-                    delete cart[id];
-                }
-            }
-            let qtyEl = document.getElementById(`qty-${id}`);
-            if (qtyEl) {
-                qtyEl.innerText = cart[id] ? cart[id].qty : 0;
-            }
-            updateTotal();
-        }
-
-        function updateTotal() {
-            let total = 0;
-            for (let id in cart) {
-                total += cart[id].price * cart[id].qty;
-            }
-            document.getElementById('cart-total').innerText = '$' + total.toLocaleString();
-        }
-
-        function sendWhatsApp() {
-            let text = "Hola! Kiosco The Grinch 🟢 - Quiero hacer el siguiente pedido:\n\n";
-            let total = 0;
-            for (let id in cart) {
-                let sub = cart[id].price * cart[id].qty;
-                text += `• ${cart[id].qty}x ${cart[id].name} ($${sub.toLocaleString()})\n`;
-                total += sub;
-            }
-            if (total === 0) {
-                alert("El carrito está vacío. Seleccioná al menos un producto.");
-                return;
-            }
-            text += `\n*TOTAL A PAGAR: $${total.toLocaleString()}*`;
-            let url = `https://wa.me/?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
-        }
-
-        renderCategories();
-    </script>
 </body>
 </html>
