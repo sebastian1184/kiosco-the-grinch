@@ -26,7 +26,7 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding: 15px;
+            padding: 12px;
             max-width: 480px;
             margin: 0 auto;
             padding-bottom: 90px;
@@ -34,96 +34,164 @@
 
         header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border-bottom: 2px solid var(--accent-green);
             padding-bottom: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding-top: 10px;
         }
 
         header h1 {
             color: var(--accent-green);
-            font-size: 24px;
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+            font-size: 22px;
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.6);
         }
 
         header p {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
-        /* Botonera Principal */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+        /* Banner de Ofertas del Día estilo el video */
+        .banner-ofertas {
+            background: linear-gradient(135deg, #2b0c0c 0%, #141c14 100%);
+            border: 2px solid var(--danger);
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: var(--text-main);
+            box-shadow: 0 0 12px rgba(255, 77, 77, 0.3);
+        }
+
+        .banner-ofertas img {
+            width: 70px;
+            height: 55px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid var(--danger);
+        }
+
+        /* Tarjetas de Categorías Principales con Imagen (como en tu video) */
+        .categories-container {
+            display: flex;
+            flex-direction: column;
             gap: 10px;
             margin-bottom: 20px;
         }
 
-        .cat-btn {
+        .cat-card {
             background: var(--card-bg);
             border: 1px solid var(--accent-dark-green);
-            color: var(--text-main);
-            padding: 14px 10px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            transition: 0.2s;
-            text-decoration: none;
+            border-radius: 10px;
+            padding: 10px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            justify-content: space-between;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: 0.2s;
         }
 
-        .cat-btn:hover {
-            background: var(--accent-dark-green);
+        .cat-card:hover {
+            border-color: var(--accent-green);
+            background: #1a291a;
         }
 
-        .section-title {
-            font-size: 15px;
+        .cat-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cat-info img {
+            width: 55px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--accent-dark-green);
+        }
+
+        .cat-info h3 {
+            font-size: 14px;
             color: var(--accent-green);
-            margin: 12px 0 8px 0;
-            font-weight: bold;
+        }
+
+        .cat-info p {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .cat-card i {
+            color: var(--accent-green);
+            font-size: 16px;
+            padding-right: 5px;
+        }
+
+        /* Listados desplegables / Secciones internas */
+        .section-detalle {
+            background: var(--card-bg);
+            border: 1px solid var(--accent-dark-green);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .section-detalle.active {
+            display: block;
+        }
+
+        .section-header-modal {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--accent-dark-green);
+            padding-bottom: 8px;
+        }
+
+        .section-header-modal h2 {
+            font-size: 14px;
+            color: var(--accent-green);
+        }
+
+        .close-section {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
             cursor: pointer;
-            background: var(--card-bg);
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--accent-dark-green);
-        }
-
-        .submenu {
-            display: none;
-            padding-left: 5px;
-            margin-bottom: 10px;
-        }
-
-        .submenu.active {
-            display: block;
+            font-weight: bold;
         }
 
         .product-card {
             background: #1a261a;
-            padding: 10px 12px;
-            margin-bottom: 8px;
+            padding: 8px 10px;
+            margin-bottom: 6px;
             border-radius: 6px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 4px solid var(--accent-green);
+            border-left: 3px solid var(--accent-green);
         }
 
         .product-info h3 {
-            font-size: 13px;
+            font-size: 12px;
             margin-bottom: 2px;
         }
 
         .product-info .price {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--accent-green);
             font-weight: bold;
         }
@@ -131,44 +199,47 @@
         .quantity-controls {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .qty-btn {
             background: var(--accent-green);
             color: #000;
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             font-weight: bold;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .qty-display {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             min-width: 15px;
             text-align: center;
         }
 
-        /* Botón Flotante del Carrito */
+        /* Barra Flotante del Carrito (idéntica al video) */
         .cart-bar {
             position: fixed;
-            bottom: 15px;
+            bottom: 12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
+            width: 92%;
             max-width: 440px;
             background: #112611;
             border: 2px solid var(--accent-green);
-            padding: 12px 20px;
+            padding: 10px 18px;
             border-radius: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
             z-index: 1000;
             cursor: pointer;
         }
@@ -176,6 +247,15 @@
         .cart-bar span {
             font-weight: bold;
             color: var(--accent-green);
+        }
+
+        .cart-bar-btn {
+            background: var(--accent-green);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
         }
 
         /* Modal del Carrito */
@@ -190,16 +270,16 @@
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            padding: 20px;
+            padding: 15px;
         }
 
         .cart-content {
             background: var(--card-bg);
             border: 2px solid var(--accent-green);
             width: 100%;
-            max-width: 400px;
+            max-width: 380px;
             border-radius: 12px;
-            padding: 20px;
+            padding: 15px;
             max-height: 80vh;
             overflow-y: auto;
         }
@@ -208,19 +288,20 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             border-bottom: 1px solid var(--accent-dark-green);
-            padding-bottom: 8px;
+            padding-bottom: 6px;
         }
 
         .close-cart {
             background: var(--danger);
             color: white;
             border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 4px 8px;
+            border-radius: 4px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 12px;
         }
 
         .whatsapp-btn {
@@ -229,11 +310,12 @@
             background: #25d366;
             color: white;
             text-align: center;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             font-weight: bold;
             text-decoration: none;
-            margin-top: 15px;
+            margin-top: 12px;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -241,75 +323,117 @@
 
     <header>
         <h1>KIOSCO THE GRINCH</h1>
-        <p>Tu kiosco de confianza</p>
+        <p>Catálogo Digital de Precios y Pedidos</p>
     </header>
 
-    <!-- Menú de Categorías -->
-    <div class="categories-grid">
-        <a href="#comidas" class="cat-btn"><i class="fa-solid fa-pizza-slice"></i> Comidas</a>
-        <a href="#bebidas" class="cat-btn"><i class="fa-solid fa-bottle-droplet"></i> Bebidas</a>
-        <a href="#almacen" class="cat-btn"><i class="fa-solid fa-basket-shopping"></i> Almacén</a>
-        <a href="#panificados" class="cat-btn"><i class="fa-solid fa-bread-slice"></i> Panificados</a>
+    <!-- Banner Ofertas del Día (como en el video) -->
+    <a href="#" class="banner-ofertas">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=150" alt="Oferta">
+            <div>
+                <h3 style="font-size: 13px; color: var(--danger);">🔥 OFERTAS DEL DÍA</h3>
+                <p style="font-size: 11px; color: var(--text-muted);">Mirá los descuentos especiales</p>
+            </div>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="color: var(--danger);"></i>
+    </a>
+
+    <!-- Menú Principal de Categorías con Imágenes (Estilo exacto de tu video) -->
+    <div class="categories-container">
+        
+        <!-- Bebidas -->
+        <div class="cat-card" onclick="abrirSeccion('sec-bebidas')">
+            <div class="cat-info">
+                <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=150" alt="Bebidas">
+                <div>
+                    <h3>Bebidas & Gaseosas</h3>
+                    <p>Coca, Fanta, Sprite, Fernet...</p>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+
+        <!-- Comidas -->
+        <div class="cat-card" onclick="abrirSeccion('sec-comidas')">
+            <div class="cat-info">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150" alt="Comidas">
+                <div>
+                    <h3>Comidas</h3>
+                    <p>Pizzas - Empanadas - Tartas</p>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+
+        <!-- Jugos & Lácteos -->
+        <div class="cat-card" onclick="abrirSeccion('sec-jugos')">
+            <div class="cat-info">
+                <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=150" alt="Lácteos">
+                <div>
+                    <h3>Jugos & Lácteos</h3>
+                    <p>Leche, yogures, jugos...</p>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+
+        <!-- Kiosco & Dulces -->
+        <div class="cat-card" onclick="abrirSeccion('sec-kiosco')">
+            <div class="cat-info">
+                <img src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=150" alt="Dulces">
+                <div>
+                    <h3>Kiosco & Dulces</h3>
+                    <p>Alfajores - Chocolates - Golosinas</p>
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+
     </div>
 
-    <!-- SECCIÓN COMIDAS -->
-    <div class="section-title" onclick="toggleSubmenu('sub-comidas')">
-        <span>🍔 Comidas y Congelados</span>
-        <i class="fa-solid fa-chevron-down"></i>
-    </div>
-    <div id="sub-comidas" class="submenu active">
-        <div class="product-card">
-            <div class="product-info">
-                <h3>Pizzas / Prepizzas</h3>
-                <div class="price">$2.200</div>
-            </div>
-            <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Pizzas', -1)">-</button>
-                <span class="qty-display" id="qty-Pizzas">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Pizzas', 1)">+</button>
-            </div>
+    <!-- SECCIÓN DESPLEGABLE: BEBIDAS (Lista completa como en el video) -->
+    <div id="sec-bebidas" class="section-detalle">
+        <div class="section-header-modal">
+            <h2>🥤 Lista de Precios Bebidas</h2>
+            <button class="close-section" onclick="cerrarSeccion('sec-bebidas')">Cerrar X</button>
         </div>
+        
         <div class="product-card">
             <div class="product-info">
-                <h3>Empanadas (Unidad)</h3>
-                <div class="price">$600</div>
-            </div>
-            <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Empanadas', -1)">-</button>
-                <span class="qty-display" id="qty-Empanadas">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Empanadas', 1)">+</button>
-            </div>
-        </div>
-        <div class="product-card">
-            <div class="product-info">
-                <h3>Medallones de Pollo</h3>
-                <div class="price">$1.500</div>
-            </div>
-            <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Medallones de Pollo', -1)">-</button>
-                <span class="qty-display" id="qty-Medallones de Pollo">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Medallones de Pollo', 1)">+</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SECCIÓN BEBIDAS -->
-    <div class="section-title" id="bebidas" onclick="toggleSubmenu('sub-bebidas')">
-        <span>🥤 Bebidas & Gaseosas</span>
-        <i class="fa-solid fa-chevron-down"></i>
-    </div>
-    <div id="sub-bebidas" class="submenu">
-        <div class="product-card">
-            <div class="product-info">
-                <h3>Coca Cola 1.5L Retornable</h3>
+                <h3>Coca Cola 1.5L (Retornable)</h3>
                 <div class="price">$2.800</div>
             </div>
             <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Coca Cola 1.5L Retornable', -1)">-</button>
-                <span class="qty-display" id="qty-Coca Cola 1.5L Retornable">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Coca Cola 1.5L Retornable', 1)">+</button>
+                <button class="qty-btn" onclick="cambiarCantidad('Coca Cola 1.5L (Retornable)', -1)">-</button>
+                <span class="qty-display" id="qty-Coca Cola 1.5L (Retornable)">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Coca Cola 1.5L (Retornable)', 1)">+</button>
             </div>
         </div>
+
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Coca - Fanta - Sprite 2L (Retornable)</h3>
+                <div class="price">$3.500</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Coca - Fanta - Sprite 2L (Retornable)', -1)">-</button>
+                <span class="qty-display" id="qty-Coca - Fanta - Sprite 2L (Retornable)">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Coca - Fanta - Sprite 2L (Retornable)', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Coca - Sprite 2.25L (Descartable)</h3>
+                <div class="price">$4.000</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Coca - Sprite 2.25L (Descartable)', -1)">-</button>
+                <span class="qty-display" id="qty-Coca - Sprite 2.25L (Descartable)">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Coca - Sprite 2.25L (Descartable)', 1)">+</button>
+            </div>
+        </div>
+
         <div class="product-card">
             <div class="product-info">
                 <h3>Fernet Branca 750ml</h3>
@@ -323,42 +447,122 @@
         </div>
     </div>
 
+    <!-- SECCIÓN DESPLEGABLE: COMIDAS -->
+    <div id="sec-comidas" class="section-detalle">
+        <div class="section-header-modal">
+            <h2>🍕 Comidas y Congelados</h2>
+            <button class="close-section" onclick="cerrarSeccion('sec-comidas')">Cerrar X</button>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Pizzas / Prepizzas</h3>
+                <div class="price">$2.200</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Pizzas / Prepizzas', -1)">-</button>
+                <span class="qty-display" id="qty-Pizzas / Prepizzas">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Pizzas / Prepizzas', 1)">+</button>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Empanadas (Unidad)</h3>
+                <div class="price">$600</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Empanadas (Unidad)', -1)">-</button>
+                <span class="qty-display" id="qty-Empanadas (Unidad)">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Empanadas (Unidad)', 1)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DESPLEGABLE: JUGOS & LÁCTEOS -->
+    <div id="sec-jugos" class="section-detalle">
+        <div class="section-header-modal">
+            <h2>🥛 Jugos & Lácteos</h2>
+            <button class="close-section" onclick="cerrarSeccion('sec-jugos')">Cerrar X</button>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Leche Sachet 1L</h3>
+                <div class="price">$1.400</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Leche Sachet 1L', -1)">-</button>
+                <span class="qty-display" id="qty-Leche Sachet 1L">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Leche Sachet 1L', 1)">+</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN DESPLEGABLE: KIOSCO & DULCES -->
+    <div id="sec-kiosco" class="section-detalle">
+        <div class="section-header-modal">
+            <h2>🍫 Kiosco & Dulces</h2>
+            <button class="close-section" onclick="cerrarSeccion('sec-kiosco')">Cerrar X</button>
+        </div>
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Alfajor Guaymallén</h3>
+                <div class="price">$500</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Alfajor Guaymallén', -1)">-</button>
+                <span class="qty-display" id="qty-Alfajor Guaymallén">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Alfajor Guaymallén', 1)">+</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Barra Flotante del Carrito -->
     <div class="cart-bar" onclick="abrirCarrito()">
         <div>🛒 <span id="cart-count">0</span> productos</div>
-        <div>Total: <span id="cart-total">$0</span></div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span>Total: <span id="cart-total">$0</span></span>
+            <div class="cart-bar-btn">Ver Carrito</div>
+        </div>
     </div>
 
     <!-- Modal del Carrito -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
             <div class="cart-header">
-                <h3>Tu Pedido en El Grinch</h3>
+                <h3>🛍️ Tu Pedido en El Grinch</h3>
                 <button class="close-cart" onclick="cerrarCarrito()">X</button>
             </div>
-            <div id="cart-items-list" style="margin-bottom: 15px; font-size: 14px;">
-                <!-- Ítems del carrito -->
+            <div id="cart-items-list" style="margin-bottom: 15px; font-size: 13px;">
+                <p style="color:var(--text-muted); text-align:center;">El carrito está vacío</p>
             </div>
-            <h3 style="text-align: right; color: var(--accent-green);">Total: <span id="modal-total">$0</span></h3>
-            <a href="#" id="whatsapp-link" class="whatsapp-btn" target="_blank">Enviar Pedido por WhatsApp</a>
+            <h3 style="text-align: right; color: var(--accent-green); font-size: 15px;">Total: <span id="modal-total">$0</span></h3>
+            <a href="#" id="whatsapp-link" class="whatsapp-btn" target="_blank"><i class="fa-brands fa-whatsapp"></i> Enviar Pedido por WhatsApp</a>
         </div>
     </div>
 
     <script>
-        // Precios de referencia de los productos
         const precios = {
-            'Pizzas': 2200,
-            'Empanadas': 600,
-            'Medallones de Pollo': 1500,
-            'Coca Cola 1.5L Retornable': 2800,
-            'Fernet Branca 750ml': 9500
+            'Coca Cola 1.5L (Retornable)': 2800,
+            'Coca - Fanta - Sprite 2L (Retornable)': 3500,
+            'Coca - Sprite 2.25L (Descartable)': 4000,
+            'Fernet Branca 750ml': 9500,
+            'Pizzas / Prepizzas': 2200,
+            'Empanadas (Unidad)': 600,
+            'Leche Sachet 1L': 1400,
+            'Alfajor Guaymallén': 500
         };
 
         let carrito = {};
 
-        function toggleSubmenu(id) {
-            const el = document.getElementById(id);
-            el.classList.toggle('active');
+        function abrirSeccion(id) {
+            // Ocultar todas las secciones primero
+            document.querySelectorAll('.section-detalle').forEach(el => el.classList.remove('active'));
+            // Mostrar la seleccionada
+            document.getElementById(id).classList.add('active');
+            window.scrollTo({ top: 300, behavior: 'smooth' });
+        }
+
+        function cerrarSeccion(id) {
+            document.getElementById(id).classList.remove('active');
         }
 
         function cambiarCantidad(producto, cambio) {
@@ -367,7 +571,9 @@
             if (carrito[producto] < 0) carrito[producto] = 0;
             if (carrito[producto] === 0) delete carrito[producto];
 
-            document.getElementById(`qty-${producto}`).innerText = carrito[producto] || 0;
+            const display = document.getElementById(`qty-${producto}`);
+            if (display) display.innerText = carrito[producto] || 0;
+            
             actualizarCarrito();
         }
 
@@ -396,7 +602,6 @@
             document.getElementById('modal-total').innerText = `$${totalPrice}`;
             document.getElementById('cart-items-list').innerHTML = listaHTML;
 
-            // Generar enlace de WhatsApp
             let mensaje = "Hola! Kiosco The Grinch, quiero hacer el siguiente pedido:%0A";
             for (let prod in carrito) {
                 mensaje += `- ${carrito[prod]}x ${prod} ($${carrito[prod] * precios[prod]})%0A`;
