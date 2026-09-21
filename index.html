@@ -55,7 +55,7 @@
             margin-top: 2px;
         }
 
-        /* Banner de Ofertas del Día estilo el video */
+        /* Banner de Ofertas */
         .banner-ofertas {
             background: linear-gradient(135deg, #2b0c0c 0%, #141c14 100%);
             border: 2px solid var(--danger);
@@ -78,7 +78,7 @@
             border: 1px solid var(--danger);
         }
 
-        /* Tarjetas de Categorías Principales con Imagen (como en tu video) */
+        /* Tarjetas de Categorías Principales */
         .categories-container {
             display: flex;
             flex-direction: column;
@@ -135,7 +135,7 @@
             padding-right: 5px;
         }
 
-        /* Listados desplegables / Secciones internas */
+        /* Secciones desplegables */
         .section-detalle {
             background: var(--card-bg);
             border: 1px solid var(--accent-dark-green);
@@ -224,7 +224,7 @@
             text-align: center;
         }
 
-        /* Barra Flotante del Carrito (idéntica al video) */
+        /* Barra Flotante del Carrito */
         .cart-bar {
             position: fixed;
             bottom: 12px;
@@ -323,67 +323,67 @@
 
     <header>
         <h1>KIOSCO THE GRINCH</h1>
-        <p>Catálogo Digital de Precios y Pedidos</p>
+        <p>Catálogo Digital de Golosinas y Pedidos</p>
     </header>
 
-    <!-- Banner Ofertas del Día (como en el video) -->
+    <!-- Banner Ofertas del Día -->
     <a href="#" class="banner-ofertas">
         <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=150" alt="Oferta">
+            <img src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=150" alt="Oferta">
             <div>
                 <h3 style="font-size: 13px; color: var(--danger);">🔥 OFERTAS DEL DÍA</h3>
-                <p style="font-size: 11px; color: var(--text-muted);">Mirá los descuentos especiales</p>
+                <p style="font-size: 11px; color: var(--text-muted);">Golosinas y galletitas en promo</p>
             </div>
         </div>
         <i class="fa-solid fa-chevron-right" style="color: var(--danger);"></i>
     </a>
 
-    <!-- Menú Principal de Categorías con Imágenes (Estilo exacto de tu video) -->
+    <!-- Menú Principal de Categorías -->
     <div class="categories-container">
         
-        <!-- Bebidas -->
-        <div class="cat-card" onclick="abrirSeccion('sec-bebidas')">
+        <!-- Galletitas & Bizcochos -->
+        <div class="cat-card" onclick="abrirSeccion('sec-galletitas')">
             <div class="cat-info">
-                <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=150" alt="Bebidas">
+                <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?w=150" alt="Galletitas">
                 <div>
-                    <h3>Bebidas & Gaseosas</h3>
-                    <p>Coca, Fanta, Sprite, Fernet...</p>
+                    <h3>Galletitas & Bizcochos</h3>
+                    <p>Don Satur, Las Colonias, Frolitas...</p>
                 </div>
             </div>
             <i class="fa-solid fa-chevron-right"></i>
         </div>
 
-        <!-- Comidas -->
-        <div class="cat-card" onclick="abrirSeccion('sec-comidas')">
+        <!-- Alfajores & Chocolates -->
+        <div class="cat-card" onclick="abrirSeccion('sec-alfajores')">
             <div class="cat-info">
-                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=150" alt="Comidas">
+                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=150" alt="Alfajores">
                 <div>
-                    <h3>Comidas</h3>
-                    <p>Pizzas - Empanadas - Tartas</p>
+                    <h3>Alfajores & Barras</h3>
+                    <p>Tofi, Toddy, Mantecol, Pepitos...</p>
                 </div>
             </div>
             <i class="fa-solid fa-chevron-right"></i>
         </div>
 
-        <!-- Jugos & Lácteos -->
-        <div class="cat-card" onclick="abrirSeccion('sec-jugos')">
+        <!-- Golosinas & Caramelos (Detalle completo del video) -->
+        <div class="cat-card" onclick="abrirSeccion('sec-golosinas')">
             <div class="cat-info">
-                <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=150" alt="Lácteos">
+                <img src="https://images.unsplash.com/photo-1581798457010-2b6d28c9dc42?w=150" alt="Golosinas">
                 <div>
-                    <h3>Jugos & Lácteos</h3>
-                    <p>Leche, yogures, jugos...</p>
+                    <h3>Golosinas & Caramelos</h3>
+                    <p>Caramelos sueltos, chupetines, etc.</p>
                 </div>
             </div>
             <i class="fa-solid fa-chevron-right"></i>
         </div>
 
-        <!-- Kiosco & Dulces -->
-        <div class="cat-card" onclick="abrirSeccion('sec-kiosco')">
+        <!-- Chicles & Mentitas -->
+        <div class="cat-card" onclick="abrirSeccion('sec-chicles')">
             <div class="cat-info">
-                <img src="https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=150" alt="Dulces">
+                <img src="https://images.unsplash.com/photo-1514517521153-1be72277b32f?w=150" alt="Chicles">
                 <div>
-                    <h3>Kiosco & Dulces</h3>
-                    <p>Alfajores - Chocolates - Golosinas</p>
+                    <h3>Chicles & Mentitas</h3>
+                    <p>Mentos, Full Mint, etc.</p>
                 </div>
             </div>
             <i class="fa-solid fa-chevron-right"></i>
@@ -391,126 +391,190 @@
 
     </div>
 
-    <!-- SECCIÓN DESPLEGABLE: BEBIDAS (Lista completa como en el video) -->
-    <div id="sec-bebidas" class="section-detalle">
+    <!-- SECCIÓN: GALLETITAS & BIZCOCHOS -->
+    <div id="sec-galletitas" class="section-detalle">
         <div class="section-header-modal">
-            <h2>🥤 Lista de Precios Bebidas</h2>
-            <button class="close-section" onclick="cerrarSeccion('sec-bebidas')">Cerrar X</button>
+            <h2>🍪 Galletitas & Bizcochos</h2>
+            <button class="close-section" onclick="cerrarSeccion('sec-galletitas')">Cerrar X</button>
         </div>
         
         <div class="product-card">
             <div class="product-info">
-                <h3>Coca Cola 1.5L (Retornable)</h3>
-                <div class="price">$2.800</div>
+                <h3>Bizcochos Don Satur (Negro/Agridulce)</h3>
+                <div class="price">$1.000</div>
             </div>
             <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Coca Cola 1.5L (Retornable)', -1)">-</button>
-                <span class="qty-display" id="qty-Coca Cola 1.5L (Retornable)">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Coca Cola 1.5L (Retornable)', 1)">+</button>
+                <button class="qty-btn" onclick="cambiarCantidad('Bizcochos Don Satur', -1)">-</button>
+                <span class="qty-display" id="qty-Bizcochos Don Satur">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Bizcochos Don Satur', 1)">+</button>
             </div>
         </div>
 
         <div class="product-card">
             <div class="product-info">
-                <h3>Coca - Fanta - Sprite 2L (Retornable)</h3>
-                <div class="price">$3.500</div>
+                <h3>Galletitas Las Colonias</h3>
+                <div class="price">$1.200</div>
             </div>
             <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Coca - Fanta - Sprite 2L (Retornable)', -1)">-</button>
-                <span class="qty-display" id="qty-Coca - Fanta - Sprite 2L (Retornable)">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Coca - Fanta - Sprite 2L (Retornable)', 1)">+</button>
+                <button class="qty-btn" onclick="cambiarCantidad('Galletitas Las Colonias', -1)">-</button>
+                <span class="qty-display" id="qty-Galletitas Las Colonias">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Galletitas Las Colonias', 1)">+</button>
             </div>
         </div>
 
         <div class="product-card">
             <div class="product-info">
-                <h3>Coca - Sprite 2.25L (Descartable)</h3>
-                <div class="price">$4.000</div>
+                <h3>Galletitas Frolitas Membrillo</h3>
+                <div class="price">$1.500</div>
             </div>
             <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Coca - Sprite 2.25L (Descartable)', -1)">-</button>
-                <span class="qty-display" id="qty-Coca - Sprite 2.25L (Descartable)">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Coca - Sprite 2.25L (Descartable)', 1)">+</button>
+                <button class="qty-btn" onclick="cambiarCantidad('Galletitas Frolitas Membrillo', -1)">-</button>
+                <span class="qty-display" id="qty-Galletitas Frolitas Membrillo">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Galletitas Frolitas Membrillo', 1)">+</button>
             </div>
         </div>
 
         <div class="product-card">
             <div class="product-info">
-                <h3>Fernet Branca 750ml</h3>
-                <div class="price">$9.500</div>
+                <h3>Galletitas 9 de Oro (Azucarados / Agridulces)</h3>
+                <div class="price">$1.100</div>
             </div>
             <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Fernet Branca 750ml', -1)">-</button>
-                <span class="qty-display" id="qty-Fernet Branca 750ml">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Fernet Branca 750ml', 1)">+</button>
+                <button class="qty-btn" onclick="cambiarCantidad('Galletitas 9 de Oro', -1)">-</button>
+                <span class="qty-display" id="qty-Galletitas 9 de Oro">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Galletitas 9 de Oro', 1)">+</button>
             </div>
         </div>
     </div>
 
-    <!-- SECCIÓN DESPLEGABLE: COMIDAS -->
-    <div id="sec-comidas" class="section-detalle">
+    <!-- SECCIÓN: ALFAJORES & BARRAS -->
+    <div id="sec-alfajores" class="section-detalle">
         <div class="section-header-modal">
-            <h2>🍕 Comidas y Congelados</h2>
-            <button class="close-section" onclick="cerrarSeccion('sec-comidas')">Cerrar X</button>
+            <h2>🍫 Alfajores & Barras</h2>
+            <button class="close-section" onclick="cerrarSeccion('sec-alfajores')">Cerrar X</button>
         </div>
+
         <div class="product-card">
             <div class="product-info">
-                <h3>Pizzas / Prepizzas</h3>
-                <div class="price">$2.200</div>
+                <h3>Alfajor Tofi (Negro / Blanco)</h3>
+                <div class="price">$900</div>
             </div>
             <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Pizzas / Prepizzas', -1)">-</button>
-                <span class="qty-display" id="qty-Pizzas / Prepizzas">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Pizzas / Prepizzas', 1)">+</button>
+                <button class="qty-btn" onclick="cambiarCantidad('Alfajor Tofi', -1)">-</button>
+                <span class="qty-display" id="qty-Alfajor Tofi">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Alfajor Tofi', 1)">+</button>
             </div>
         </div>
+
         <div class="product-card">
             <div class="product-info">
-                <h3>Empanadas (Unidad)</h3>
-                <div class="price">$600</div>
+                <h3>Alfajor Mantecol</h3>
+                <div class="price">$1.000</div>
             </div>
             <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Empanadas (Unidad)', -1)">-</button>
-                <span class="qty-display" id="qty-Empanadas (Unidad)">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Empanadas (Unidad)', 1)">+</button>
+                <button class="qty-btn" onclick="cambiarCantidad('Alfajor Mantecol', -1)">-</button>
+                <span class="qty-display" id="qty-Alfajor Mantecol">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Alfajor Mantecol', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Alfajor Toddy / Ful Maní</h3>
+                <div class="price">$950</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Alfajor Toddy / Ful Maní', -1)">-</button>
+                <span class="qty-display" id="qty-Alfajor Toddy / Ful Maní">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Alfajor Toddy / Ful Maní', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Barra Cereal Flow / Pepitos con Chispa</h3>
+                <div class="price">$800</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Barra Cereal Flow / Pepitos', -1)">-</button>
+                <span class="qty-display" id="qty-Barra Cereal Flow / Pepitos">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Barra Cereal Flow / Pepitos', 1)">+</button>
             </div>
         </div>
     </div>
 
-    <!-- SECCIÓN DESPLEGABLE: JUGOS & LÁCTEOS -->
-    <div id="sec-jugos" class="section-detalle">
+    <!-- SECCIÓN: GOLOSINAS & CARAMELOS (DETALLE ITEM POR ITEM DEL VIDEO) -->
+    <div id="sec-golosinas" class="section-detalle">
         <div class="section-header-modal">
-            <h2>🥛 Jugos & Lácteos</h2>
-            <button class="close-section" onclick="cerrarSeccion('sec-jugos')">Cerrar X</button>
+            <h2>🍬 Golosinas & Caramelos</h2>
+            <button class="close-section" onclick="cerrarSeccion('sec-golosinas')">Cerrar X</button>
         </div>
+
         <div class="product-card">
             <div class="product-info">
-                <h3>Leche Sachet 1L</h3>
-                <div class="price">$1.400</div>
+                <h3>Caramelos Sueltos (Naranja, Menta, Frutilla, etc.) x unidad</h3>
+                <div class="price">$150</div>
             </div>
             <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Leche Sachet 1L', -1)">-</button>
-                <span class="qty-display" id="qty-Leche Sachet 1L">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Leche Sachet 1L', 1)">+</button>
+                <button class="qty-btn" onclick="cambiarCantidad('Caramelos Sueltos x u', -1)">-</button>
+                <span class="qty-display" id="qty-Caramelos Sueltos x u">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Caramelos Sueltos x u', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Chupetín Pico Dulce / Balitas</h3>
+                <div class="price">$400</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Chupetín Pico Dulce', -1)">-</button>
+                <span class="qty-display" id="qty-Chupetín Pico Dulce">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Chupetín Pico Dulce', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Chupetines de Fruta (Balde)</h3>
+                <div class="price">$300</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Chupetines de Fruta', -1)">-</button>
+                <span class="qty-display" id="qty-Chupetines de Fruta">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Chupetines de Fruta', 1)">+</button>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-info">
+                <h3>Caramelos Palorito (Gomita/Chupetín)</h3>
+                <div class="price">$400</div>
+            </div>
+            <div class="quantity-controls">
+                <button class="qty-btn" onclick="cambiarCantidad('Caramelos Palorito', -1)">-</button>
+                <span class="qty-display" id="qty-Caramelos Palorito">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Caramelos Palorito', 1)">+</button>
             </div>
         </div>
     </div>
 
-    <!-- SECCIÓN DESPLEGABLE: KIOSCO & DULCES -->
-    <div id="sec-kiosco" class="section-detalle">
+    <!-- SECCIÓN: CHICLES & MENTITAS -->
+    <div id="sec-chicles" class="section-detalle">
         <div class="section-header-modal">
-            <h2>🍫 Kiosco & Dulces</h2>
-            <button class="close-section" onclick="cerrarSeccion('sec-kiosco')">Cerrar X</button>
+            <h2>🟢 Chicles & Mentitas</h2>
+            <button class="close-section" onclick="cerrarSeccion('sec-chicles')">Cerrar X</button>
         </div>
+
         <div class="product-card">
             <div class="product-info">
-                <h3>Alfajor Guaymallén</h3>
-                <div class="price">$500</div>
+                <h3>Caramelos Mentos / Full Mint</h3>
+                <div class="price">$700</div>
             </div>
             <div class="quantity-controls">
-                <button class="qty-btn" onclick="cambiarCantidad('Alfajor Guaymallén', -1)">-</button>
-                <span class="qty-display" id="qty-Alfajor Guaymallén">0</span>
-                <button class="qty-btn" onclick="cambiarCantidad('Alfajor Guaymallén', 1)">+</button>
+                <button class="qty-btn" onclick="cambiarCantidad('Caramelos Mentos / Full Mint', -1)">-</button>
+                <span class="qty-display" id="qty-Caramelos Mentos / Full Mint">0</span>
+                <button class="qty-btn" onclick="cambiarCantidad('Caramelos Mentos / Full Mint', 1)">+</button>
             </div>
         </div>
     </div>
@@ -541,22 +605,25 @@
 
     <script>
         const precios = {
-            'Coca Cola 1.5L (Retornable)': 2800,
-            'Coca - Fanta - Sprite 2L (Retornable)': 3500,
-            'Coca - Sprite 2.25L (Descartable)': 4000,
-            'Fernet Branca 750ml': 9500,
-            'Pizzas / Prepizzas': 2200,
-            'Empanadas (Unidad)': 600,
-            'Leche Sachet 1L': 1400,
-            'Alfajor Guaymallén': 500
+            'Bizcochos Don Satur': 1000,
+            'Galletitas Las Colonias': 1200,
+            'Galletitas Frolitas Membrillo': 1500,
+            'Galletitas 9 de Oro': 1100,
+            'Alfajor Tofi': 900,
+            'Alfajor Mantecol': 1000,
+            'Alfajor Toddy / Ful Maní': 950,
+            'Barra Cereal Flow / Pepitos': 800,
+            'Caramelos Sueltos x u': 150,
+            'Chupetín Pico Dulce': 400,
+            'Chupetines de Fruta': 300,
+            'Caramelos Palorito': 400,
+            'Caramelos Mentos / Full Mint': 700
         };
 
         let carrito = {};
 
         function abrirSeccion(id) {
-            // Ocultar todas las secciones primero
             document.querySelectorAll('.section-detalle').forEach(el => el.classList.remove('active'));
-            // Mostrar la seleccionada
             document.getElementById(id).classList.add('active');
             window.scrollTo({ top: 300, behavior: 'smooth' });
         }
